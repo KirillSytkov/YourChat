@@ -11,6 +11,8 @@
 		4907983F288EA9470077245A /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4907983E288EA9470077245A /* AuthViewController.swift */; };
 		49079844288EA9490077245A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49079843288EA9490077245A /* Assets.xcassets */; };
 		49079847288EA9490077245A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49079845288EA9490077245A /* LaunchScreen.storyboard */; };
+		49915304288F0D3F00D7E86D /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49915303288F0D3F00D7E86D /* SignUpViewController.swift */; };
+		49915306288F108400D7E86D /* OneLineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49915305288F108400D7E86D /* OneLineTextField.swift */; };
 		49F45FCB288ECC63008DC461 /* UIButton + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F45FCA288ECC63008DC461 /* UIButton + extension.swift */; };
 		49F45FCD288ECD56008DC461 /* UIView + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F45FCC288ECD56008DC461 /* UIView + extension.swift */; };
 		49F45FCF288ECE25008DC461 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F45FCE288ECE25008DC461 /* Constants.swift */; };
@@ -28,6 +30,8 @@
 		49079843288EA9490077245A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49079846288EA9490077245A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		49079848288EA9490077245A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49915303288F0D3F00D7E86D /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		49915305288F108400D7E86D /* OneLineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneLineTextField.swift; sourceTree = "<group>"; };
 		49F45FCA288ECC63008DC461 /* UIButton + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + extension.swift"; sourceTree = "<group>"; };
 		49F45FCC288ECD56008DC461 /* UIView + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + extension.swift"; sourceTree = "<group>"; };
 		49F45FCE288ECE25008DC461 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -74,7 +78,7 @@
 				49079853288EAABF0077245A /* Resources */,
 				4907984F288EAAA90077245A /* Extension */,
 				49079852288EAAB50077245A /* Controller */,
-				4907984E288EAAA40077245A /* View */,
+				4907984E288EAAA40077245A /* Views */,
 				49079851288EAAB30077245A /* Data */,
 				49079850288EAAAD0077245A /* Model */,
 				49079848288EA9490077245A /* Info.plist */,
@@ -82,12 +86,13 @@
 			path = YourChat;
 			sourceTree = "<group>";
 		};
-		4907984E288EAAA40077245A /* View */ = {
+		4907984E288EAAA40077245A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				49F45FDA288ED461008DC461 /* ButtonFormView.swift */,
+				49915307288F116900D7E86D /* AuthView */,
+				49915308288F117300D7E86D /* SignUpVIew */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		4907984F288EAAA90077245A /* Extension */ = {
@@ -120,7 +125,8 @@
 		49079852288EAAB50077245A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				4907983E288EA9470077245A /* AuthViewController.swift */,
+				49915309288F119F00D7E86D /* AuthViewController */,
+				4991530A288F11AC00D7E86D /* SignUpViewController */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -131,6 +137,38 @@
 				49079843288EA9490077245A /* Assets.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		49915307288F116900D7E86D /* AuthView */ = {
+			isa = PBXGroup;
+			children = (
+				49F45FDA288ED461008DC461 /* ButtonFormView.swift */,
+			);
+			path = AuthView;
+			sourceTree = "<group>";
+		};
+		49915308288F117300D7E86D /* SignUpVIew */ = {
+			isa = PBXGroup;
+			children = (
+				49915305288F108400D7E86D /* OneLineTextField.swift */,
+			);
+			path = SignUpVIew;
+			sourceTree = "<group>";
+		};
+		49915309288F119F00D7E86D /* AuthViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4907983E288EA9470077245A /* AuthViewController.swift */,
+			);
+			path = AuthViewController;
+			sourceTree = "<group>";
+		};
+		4991530A288F11AC00D7E86D /* SignUpViewController */ = {
+			isa = PBXGroup;
+			children = (
+				49915303288F0D3F00D7E86D /* SignUpViewController.swift */,
+			);
+			path = SignUpViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,6 +241,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49915304288F0D3F00D7E86D /* SignUpViewController.swift in Sources */,
 				49F45FD1288ECE30008DC461 /* UIFont + extension.swift in Sources */,
 				49F45FCF288ECE25008DC461 /* Constants.swift in Sources */,
 				49F45FD7288ED11E008DC461 /* UILabale + extension.swift in Sources */,
@@ -210,6 +249,7 @@
 				49F45FCD288ECD56008DC461 /* UIView + extension.swift in Sources */,
 				49F45FD9288ED1C1008DC461 /* UIImageView + extension.swift in Sources */,
 				4907983F288EA9470077245A /* AuthViewController.swift in Sources */,
+				49915306288F108400D7E86D /* OneLineTextField.swift in Sources */,
 				49F45FDD288EDDD5008DC461 /* UIStackView + extension.swift in Sources */,
 				4907983B288EA9470077245A /* AppDelegate.swift in Sources */,
 				49F45FCB288ECC63008DC461 /* UIButton + extension.swift in Sources */,

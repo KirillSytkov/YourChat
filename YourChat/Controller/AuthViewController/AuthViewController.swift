@@ -10,18 +10,18 @@ import UIKit
 class AuthViewController: UIViewController {
    //MARK: - Properties
    
-   let logoImageView = UIImageView(image: Constants.Images.logoImage, contentMode: .scaleToFill)
-   let logoLabel = UILabel(text: "YourChat")
+   private let logoImageView = UIImageView(image: Constants.Images.logoImage, contentMode: .scaleToFill)
+   private let logoLabel = UILabel(text: "YourChat")
  
-   let stackView = UIStackView()
+   private let stackView = UIStackView()
    
-   let googleLabel = UILabel(text: "Get started with")
-   let emailLabel = UILabel(text: "Or sign up with")
-   let alreadyOnboardLabel = UILabel(text: "Already onboard?")
+   private let googleLabel = UILabel(text: "Get started with")
+   private let emailLabel = UILabel(text: "Or sign up with")
+   private let alreadyOnboardLabel = UILabel(text: "Already onboard?")
    
-   let googleButton = UIButton(title: "Google", titleColor: .black, backgroundColor: .white, isShadow: true)
-   let emailButton = UIButton(title: "Email", titleColor: .white, backgroundColor: .darkGray)
-   let loginButton = UIButton(title: "Login", titleColor: .systemPink, backgroundColor: .white,font: UIFont.preferredFont(forTextStyle: .title2), isShadow: true)
+   private let googleButton = UIButton(title: "Google", titleColor: .black, backgroundColor: .white, isShadow: true)
+   private let emailButton = UIButton(title: "Email", titleColor: .white, backgroundColor: .darkGray)
+   private let loginButton = UIButton(title: "Login", titleColor: .systemPink, backgroundColor: .white,font: UIFont.preferredFont(forTextStyle: .title2), isShadow: true)
    
    
    //MARK: - Lyfecycles
@@ -35,6 +35,7 @@ class AuthViewController: UIViewController {
    //MARK: - Actions
    
    
+   
    //MARK: - Flow func
    private func setup() {
       stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -46,8 +47,12 @@ class AuthViewController: UIViewController {
       logoLabel.font = UIFont.preferredFont(forTextStyle: .largeTitle)
       logoLabel.textColor = .darkGray
       
-      
    }
+   
+}
+//MARK: - Extensions
+
+extension AuthViewController {
    
    private func layout() {
       let googleView = ButtonFormView(label: googleLabel, button: googleButton)
@@ -77,8 +82,6 @@ class AuthViewController: UIViewController {
       ])
    }
 }
-//MARK: - Extensions
-
 
 //MARK: - SwiftUI Preview
 import SwiftUI
