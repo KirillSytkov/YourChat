@@ -11,6 +11,9 @@
 		4906E522288FDF0E00846E7E /* SetupProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4906E521288FDF0E00846E7E /* SetupProfileViewController.swift */; };
 		4906E524288FE2E200846E7E /* AddPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4906E523288FE2E200846E7E /* AddPhotoView.swift */; };
 		4906E5262890079000846E7E /* UISegmentedControl + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4906E5252890079000846E7E /* UISegmentedControl + extension.swift */; };
+		4906E5282890181600846E7E /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4906E5272890181600846E7E /* ListViewController.swift */; };
+		4906E52C2890186300846E7E /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4906E52B2890186300846E7E /* MainTabBarController.swift */; };
+		4906E52E2890192A00846E7E /* PeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4906E52D2890192A00846E7E /* PeopleViewController.swift */; };
 		4907983B288EA9470077245A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4907983A288EA9470077245A /* AppDelegate.swift */; };
 		4907983F288EA9470077245A /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4907983E288EA9470077245A /* AuthViewController.swift */; };
 		49079844288EA9490077245A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49079843288EA9490077245A /* Assets.xcassets */; };
@@ -32,6 +35,9 @@
 		4906E521288FDF0E00846E7E /* SetupProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupProfileViewController.swift; sourceTree = "<group>"; };
 		4906E523288FE2E200846E7E /* AddPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoView.swift; sourceTree = "<group>"; };
 		4906E5252890079000846E7E /* UISegmentedControl + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISegmentedControl + extension.swift"; sourceTree = "<group>"; };
+		4906E5272890181600846E7E /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		4906E52B2890186300846E7E /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		4906E52D2890192A00846E7E /* PeopleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleViewController.swift; sourceTree = "<group>"; };
 		49079837288EA9470077245A /* YourChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YourChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4907983A288EA9470077245A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4907983E288EA9470077245A /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
@@ -75,6 +81,27 @@
 				4906E521288FDF0E00846E7E /* SetupProfileViewController.swift */,
 			);
 			path = SetupProfileViewController;
+			sourceTree = "<group>";
+		};
+		4906E52A2890182100846E7E /* SignIn&Auth */ = {
+			isa = PBXGroup;
+			children = (
+				4906E520288FDECF00846E7E /* SetupProfileViewController */,
+				49915309288F119F00D7E86D /* AuthViewController */,
+				4991530A288F11AC00D7E86D /* SignUpViewController */,
+				4906E51D288FDA8B00846E7E /* LoginVIew */,
+			);
+			path = "SignIn&Auth";
+			sourceTree = "<group>";
+		};
+		4906E52F2890195600846E7E /* MainScreens */ = {
+			isa = PBXGroup;
+			children = (
+				4906E52B2890186300846E7E /* MainTabBarController.swift */,
+				4906E5272890181600846E7E /* ListViewController.swift */,
+				4906E52D2890192A00846E7E /* PeopleViewController.swift */,
+			);
+			path = MainScreens;
 			sourceTree = "<group>";
 		};
 		4907982E288EA9470077245A = {
@@ -151,10 +178,8 @@
 		49079852288EAAB50077245A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				4906E520288FDECF00846E7E /* SetupProfileViewController */,
-				49915309288F119F00D7E86D /* AuthViewController */,
-				4991530A288F11AC00D7E86D /* SignUpViewController */,
-				4906E51D288FDA8B00846E7E /* LoginVIew */,
+				4906E52A2890182100846E7E /* SignIn&Auth */,
+				4906E52F2890195600846E7E /* MainScreens */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -253,9 +278,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4906E5282890181600846E7E /* ListViewController.swift in Sources */,
 				49915304288F0D3F00D7E86D /* SignUpViewController.swift in Sources */,
+				4906E52C2890186300846E7E /* MainTabBarController.swift in Sources */,
 				49F45FD1288ECE30008DC461 /* UIFont + extension.swift in Sources */,
 				4906E5262890079000846E7E /* UISegmentedControl + extension.swift in Sources */,
+				4906E52E2890192A00846E7E /* PeopleViewController.swift in Sources */,
 				49F45FCF288ECE25008DC461 /* Constants.swift in Sources */,
 				49F45FD7288ED11E008DC461 /* UILabale + extension.swift in Sources */,
 				4906E522288FDF0E00846E7E /* SetupProfileViewController.swift in Sources */,
