@@ -41,6 +41,8 @@ class LoginViewController: UIViewController {
    private func setup() {
       welcomeLabel.translatesAutoresizingMaskIntoConstraints = false
       
+      googleButton.customizedGoogleButton()
+
       orLabel.translatesAutoresizingMaskIntoConstraints = false
       
       loginButton.translatesAutoresizingMaskIntoConstraints = false

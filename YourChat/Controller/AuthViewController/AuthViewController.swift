@@ -47,6 +47,7 @@ class AuthViewController: UIViewController {
       logoLabel.font = UIFont.preferredFont(forTextStyle: .largeTitle)
       logoLabel.textColor = .darkGray
       
+      googleButton.customizedGoogleButton()
    }
    
 }

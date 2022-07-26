@@ -22,8 +22,26 @@ extension UIButton {
       self.backgroundColor = backgroundColor
       self.titleLabel?.font = font
       self.layer.cornerRadius = cornerRadius
+      
       if isShadow {
          self.dropShadow()
       }
    }
+   
+   func customizedGoogleButton() {
+      let googleLogo = UIImageView(image: "googleIcon.png", contentMode: .scaleAspectFit)
+      googleLogo.translatesAutoresizingMaskIntoConstraints = false
+      
+      self.addSubview(googleLogo)
+      
+      NSLayoutConstraint.activate([
+         googleLogo.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 24),
+         googleLogo.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+         googleLogo.heightAnchor.constraint(equalToConstant: 20),
+         googleLogo.widthAnchor.constraint(equalTo: googleLogo.heightAnchor),
+         
+      ])
+          
+   }
+   
 }
