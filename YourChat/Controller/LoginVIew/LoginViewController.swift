@@ -1,16 +1,20 @@
 //
-//  SignUpViewController.swift
+//  LoginViewController.swift
 //  YourChat
 //
-//  Created by Kirill Sytkov on 25.07.2022.
+//  Created by Kirill Sytkov on 26.07.2022.
 //
 
-import Foundation
 import UIKit
 
-class SignUpViewController: UIViewController {
+class LoginViewController: UIViewController {
    //MARK: - Properties
-   private let welcomeLabel = UILabel(text: "Good to see you!", font: .avenir26())
+   private let welcomeLabel = UILabel(text: "Welcome Back!", font: .avenir26())
+   
+   private let googleLabel = UILabel(text: "Login with")
+   private let googleButton = UIButton(title: "Google", titleColor: .black, backgroundColor: .white, isShadow: true)
+   
+   private let orLabel = UILabel(text: "or")
    
    private let emailLabel = UILabel(text: "Email")
    private let emailTextFiled = OneLineTextField(font: .avenir20())
@@ -18,15 +22,12 @@ class SignUpViewController: UIViewController {
    private let passwordLabel = UILabel(text: "Password")
    private let passwordTextField = OneLineTextField(font: .avenir20())
    
-   private let confirmLabel = UILabel(text: "Confirm password")
-   private let confirmTextField = OneLineTextField(font: .avenir20())
-   
    private let signUpButton = UIButton(title: "Sing up", titleColor: .white, backgroundColor: .darkGray)
    
-   private let alreadyOnboardLabel = UILabel(text: "Already onboard?")
+   private let alreadyOnboardLabel = UILabel(text: "Need an account?")
    private let loginButton = UIButton()
    
-   //MARK: - Lyficycles
+   //MARK: - Lyfecycles
    override func viewDidLoad() {
       super.viewDidLoad()
       setup()
@@ -36,25 +37,27 @@ class SignUpViewController: UIViewController {
    //MARK: - Actions
    
    
-   //MARK: - flow func
+   //MARK: - Flow func
    private func setup() {
       welcomeLabel.translatesAutoresizingMaskIntoConstraints = false
       
+      orLabel.translatesAutoresizingMaskIntoConstraints = false
+      
       loginButton.translatesAutoresizingMaskIntoConstraints = false
-      loginButton.setTitle("Login", for: .normal)
+      loginButton.setTitle("Sign up", for: .normal)
       loginButton.setTitleColor(.systemPink, for: .normal)
       loginButton.titleLabel?.font = .avenir20()
       
       passwordTextField.isSecureTextEntry = true
-      confirmTextField.isSecureTextEntry = true
    }
    
    private func layout() {
+      let googleView = ButtonFormView(label: googleLabel, button: googleButton)
+      
       let emailStackView = UIStackView(arrangedSubviews: [emailLabel,emailTextFiled], axis: .vertical, spacing: 5)
       let passwordStackView = UIStackView(arrangedSubviews: [passwordLabel, passwordTextField], axis: .vertical, spacing: 5)
-      let confirmStackView = UIStackView(arrangedSubviews: [confirmLabel, confirmTextField], axis: .vertical, spacing: 5)
       
-      let stackView = UIStackView(arrangedSubviews: [emailStackView, passwordStackView, confirmStackView, signUpButton], axis: .vertical, spacing: 30)
+      let stackView = UIStackView(arrangedSubviews: [googleView, orLabel, emailStackView, passwordStackView, signUpButton], axis: .vertical, spacing: 30)
       
       let bottomStackView = UIStackView(arrangedSubviews: [alreadyOnboardLabel,loginButton], axis: .horizontal, spacing: 20)
       
@@ -64,7 +67,7 @@ class SignUpViewController: UIViewController {
       view.addSubview(welcomeLabel)
       view.addSubview(stackView)
       view.addSubview(bottomStackView)
-
+      
       NSLayoutConstraint.activate([
          welcomeLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
          welcomeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -78,28 +81,27 @@ class SignUpViewController: UIViewController {
          bottomStackView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 50),
          bottomStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
       ])
-      
    }
-   
 }
+
 //MARK: - Extensions
+
 
 //MARK: - SwiftUI Preview
 import SwiftUI
 
-struct SignUpViewControllerProvider: PreviewProvider {
+struct LoginViewControllerProvider: PreviewProvider {
    
    static var previews: some View {
       ContainerView()
-         .previewDevice("iPhone 13")
          .edgesIgnoringSafeArea(.all)
          
    }
    
    struct ContainerView: UIViewControllerRepresentable {
-      let viewController = SignUpViewController()
+      let viewController = LoginViewController()
       
-      func makeUIViewController(context: Context) -> some SignUpViewController {
+      func makeUIViewController(context: Context) -> some LoginViewController {
          return viewController
       }
       
@@ -108,3 +110,5 @@ struct SignUpViewControllerProvider: PreviewProvider {
       }
    }
 }
+
+

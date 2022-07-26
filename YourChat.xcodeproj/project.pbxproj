@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4906E51F288FDAB500846E7E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4906E51E288FDAB500846E7E /* LoginViewController.swift */; };
 		4907983B288EA9470077245A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4907983A288EA9470077245A /* AppDelegate.swift */; };
 		4907983F288EA9470077245A /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4907983E288EA9470077245A /* AuthViewController.swift */; };
 		49079844288EA9490077245A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49079843288EA9490077245A /* Assets.xcassets */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4906E51E288FDAB500846E7E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		49079837288EA9470077245A /* YourChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YourChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4907983A288EA9470077245A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4907983E288EA9470077245A /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
@@ -53,6 +55,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4906E51D288FDA8B00846E7E /* LoginVIew */ = {
+			isa = PBXGroup;
+			children = (
+				4906E51E288FDAB500846E7E /* LoginViewController.swift */,
+			);
+			path = LoginVIew;
+			sourceTree = "<group>";
+		};
 		4907982E288EA9470077245A = {
 			isa = PBXGroup;
 			children = (
@@ -89,8 +99,8 @@
 		4907984E288EAAA40077245A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				49915307288F116900D7E86D /* AuthView */,
-				49915308288F117300D7E86D /* SignUpVIew */,
+				49F45FDA288ED461008DC461 /* ButtonFormView.swift */,
+				49915305288F108400D7E86D /* OneLineTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -127,6 +137,7 @@
 			children = (
 				49915309288F119F00D7E86D /* AuthViewController */,
 				4991530A288F11AC00D7E86D /* SignUpViewController */,
+				4906E51D288FDA8B00846E7E /* LoginVIew */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -137,22 +148,6 @@
 				49079843288EA9490077245A /* Assets.xcassets */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		49915307288F116900D7E86D /* AuthView */ = {
-			isa = PBXGroup;
-			children = (
-				49F45FDA288ED461008DC461 /* ButtonFormView.swift */,
-			);
-			path = AuthView;
-			sourceTree = "<group>";
-		};
-		49915308288F117300D7E86D /* SignUpVIew */ = {
-			isa = PBXGroup;
-			children = (
-				49915305288F108400D7E86D /* OneLineTextField.swift */,
-			);
-			path = SignUpVIew;
 			sourceTree = "<group>";
 		};
 		49915309288F119F00D7E86D /* AuthViewController */ = {
@@ -252,6 +247,7 @@
 				49915306288F108400D7E86D /* OneLineTextField.swift in Sources */,
 				49F45FDD288EDDD5008DC461 /* UIStackView + extension.swift in Sources */,
 				4907983B288EA9470077245A /* AppDelegate.swift in Sources */,
+				4906E51F288FDAB500846E7E /* LoginViewController.swift in Sources */,
 				49F45FCB288ECC63008DC461 /* UIButton + extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
