@@ -20,6 +20,9 @@
 		49079847288EA9490077245A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49079845288EA9490077245A /* LaunchScreen.storyboard */; };
 		49915304288F0D3F00D7E86D /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49915303288F0D3F00D7E86D /* SignUpViewController.swift */; };
 		49915306288F108400D7E86D /* OneLineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49915305288F108400D7E86D /* OneLineTextField.swift */; };
+		499ADB872891518100F6E0E9 /* activeChats.json in Resources */ = {isa = PBXBuildFile; fileRef = 499ADB852891518100F6E0E9 /* activeChats.json */; };
+		499ADB882891518100F6E0E9 /* waitingChats.json in Resources */ = {isa = PBXBuildFile; fileRef = 499ADB862891518100F6E0E9 /* waitingChats.json */; };
+		499ADB8A289151A700F6E0E9 /* Bundle + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499ADB89289151A700F6E0E9 /* Bundle + extension.swift */; };
 		49F45FCB288ECC63008DC461 /* UIButton + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F45FCA288ECC63008DC461 /* UIButton + extension.swift */; };
 		49F45FCD288ECD56008DC461 /* UIView + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F45FCC288ECD56008DC461 /* UIView + extension.swift */; };
 		49F45FCF288ECE25008DC461 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F45FCE288ECE25008DC461 /* Constants.swift */; };
@@ -46,6 +49,9 @@
 		49079848288EA9490077245A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49915303288F0D3F00D7E86D /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		49915305288F108400D7E86D /* OneLineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneLineTextField.swift; sourceTree = "<group>"; };
+		499ADB852891518100F6E0E9 /* activeChats.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = activeChats.json; sourceTree = "<group>"; };
+		499ADB862891518100F6E0E9 /* waitingChats.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = waitingChats.json; sourceTree = "<group>"; };
+		499ADB89289151A700F6E0E9 /* Bundle + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle + extension.swift"; sourceTree = "<group>"; };
 		49F45FCA288ECC63008DC461 /* UIButton + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + extension.swift"; sourceTree = "<group>"; };
 		49F45FCC288ECD56008DC461 /* UIView + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + extension.swift"; sourceTree = "<group>"; };
 		49F45FCE288ECE25008DC461 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -150,6 +156,7 @@
 		4907984F288EAAA90077245A /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				499ADB89289151A700F6E0E9 /* Bundle + extension.swift */,
 				49F45FCA288ECC63008DC461 /* UIButton + extension.swift */,
 				4906E5252890079000846E7E /* UISegmentedControl + extension.swift */,
 				49F45FDC288EDDD5008DC461 /* UIStackView + extension.swift */,
@@ -171,6 +178,8 @@
 		49079851288EAAB30077245A /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				499ADB852891518100F6E0E9 /* activeChats.json */,
+				499ADB862891518100F6E0E9 /* waitingChats.json */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -267,7 +276,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				49079847288EA9490077245A /* LaunchScreen.storyboard in Resources */,
+				499ADB872891518100F6E0E9 /* activeChats.json in Resources */,
 				49079844288EA9490077245A /* Assets.xcassets in Resources */,
+				499ADB882891518100F6E0E9 /* waitingChats.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,6 +302,7 @@
 				49F45FCD288ECD56008DC461 /* UIView + extension.swift in Sources */,
 				4906E524288FE2E200846E7E /* AddPhotoView.swift in Sources */,
 				49F45FD9288ED1C1008DC461 /* UIImageView + extension.swift in Sources */,
+				499ADB8A289151A700F6E0E9 /* Bundle + extension.swift in Sources */,
 				4907983F288EA9470077245A /* AuthViewController.swift in Sources */,
 				49915306288F108400D7E86D /* OneLineTextField.swift in Sources */,
 				49F45FDD288EDDD5008DC461 /* UIStackView + extension.swift in Sources */,
