@@ -32,13 +32,23 @@ class ListViewController: UIViewController {
    enum Section: Int, CaseIterable {
       case waitingChats
       case activeChats
+      
+      func  description() -> String {
+         switch self {
+            
+         case .waitingChats:
+            return "Waiting chats"
+         case .activeChats:
+            return "Active chats"
+         }
+      }
    }
    
    private var dataSource: UICollectionViewDiffableDataSource<Section, MChat>?
    private var collectionView: UICollectionView!
    
    private let searchController = UISearchController(searchResultsController: nil)
-  
+   
    
    //MARK: - Lyfecycles
    override func viewDidLoad() {
@@ -50,7 +60,7 @@ class ListViewController: UIViewController {
       setupDataSource()
       reloadData()
    }
-  
+   
    
    //MARK: - Actions
    
@@ -69,14 +79,17 @@ class ListViewController: UIViewController {
    private func setupCollectionView() {
       collectionView  = UICollectionView(frame: view.bounds, collectionViewLayout: createCompositionalLayout())
       collectionView.register(ActiveChatCell.self, forCellWithReuseIdentifier: ActiveChatCell.reuseId)
+      
       collectionView.register(WaitingVhatCell.self, forCellWithReuseIdentifier: WaitingVhatCell.reuseId)
+      collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.reuseId)
+      
       collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
       collectionView.backgroundColor = .systemBackground
       
       view.addSubview(collectionView)
       
    }
-
+   
 }
 
 //MARK: - Data source layout
@@ -102,6 +115,14 @@ extension ListViewController {
             return self.configure(cellType: WaitingVhatCell.self, with: itemIdentifier, for: indexPath)
          }
       })
+      
+      dataSource?.supplementaryViewProvider = { collectionView, kind, indexPath in
+         guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SectionHeader.reuseId, for: indexPath) as? SectionHeader else { return nil }
+         guard let section = Section(rawValue: indexPath.section) else  { return nil }
+         
+         sectionHeader.configure(text: section.description(), font: .laoSangamMN20(), textColor: .systemGray)
+         return sectionHeader
+      }
    }
    
    private func reloadData() {
@@ -109,7 +130,7 @@ extension ListViewController {
       snapshot.appendSections([.waitingChats, .activeChats])
       snapshot.appendItems(waitingChats, toSection: .waitingChats)
       snapshot.appendItems(activeChats, toSection: .activeChats)
-
+      
       dataSource?.apply(snapshot, animatingDifferences: true)
    }
 }
@@ -130,6 +151,10 @@ extension ListViewController {
          }
       }
       
+      let config = UICollectionViewCompositionalLayoutConfiguration()
+      config.interSectionSpacing = 20
+      layout.configuration = config
+      
       return layout
    }
    
@@ -142,7 +167,11 @@ extension ListViewController {
       
       let section = NSCollectionLayoutSection(group: group)
       section.interGroupSpacing = 8
-      section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 20, bottom: 0, trailing: 20)
+      section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 0, trailing: 20)
+      
+      let sectionHeader = createSectionHeader()
+      section.boundarySupplementaryItems = [sectionHeader]
+      
       return section
    }
    
@@ -156,11 +185,20 @@ extension ListViewController {
       let section = NSCollectionLayoutSection(group: group)
       section.orthogonalScrollingBehavior = .continuous
       section.interGroupSpacing = 20
-      section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 20, bottom: 0, trailing: 20)
+      section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 0, trailing: 20)
+      
+      let sectionHeader = createSectionHeader()
+      section.boundarySupplementaryItems = [sectionHeader]
       
       return section
    }
-  
+   
+   private func createSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
+      let setionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(1))
+      let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: setionHeaderSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+      return sectionHeader
+   }
+   
 }
 
 
