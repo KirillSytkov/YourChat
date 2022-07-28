@@ -7,11 +7,6 @@
 
 import UIKit
 
-protocol SelfConfigureCell {
-   static var reuseId: String { get }
-   func configure(with value: MChat)
-}
-
 class ActiveChatCell: UICollectionViewCell {
    
    private let friendImageView = UIImageView()

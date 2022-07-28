@@ -9,10 +9,6 @@ import UIKit
 
 struct Constants {
    
-   struct Cell {
-      static let activeCell = "activeCell"
-      static let waitingCell = "waitingCell"
-   }
    struct Images {
       static let logoImage = "appLogo.png"
    }
