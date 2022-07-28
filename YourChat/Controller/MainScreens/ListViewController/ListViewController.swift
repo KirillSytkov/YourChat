@@ -7,22 +7,6 @@
 
 import UIKit
 
-struct MChat: Hashable, Decodable {
-   let username: String
-   let userImageString: String
-   let lastMessage: String
-   var id: Int
-   
-   func hash(into hasher: inout Hasher) {
-      hasher.combine(id)
-   }
-   
-   static func == (lhs: MChat, rhs: MChat) -> Bool {
-      return lhs.id == rhs.id
-   }
-   
-}
-
 class ListViewController: UIViewController {
    //MARK: - Properties
    
@@ -94,12 +78,6 @@ class ListViewController: UIViewController {
 
 //MARK: - Data source layout
 extension ListViewController {
-   private func configure<T: SelfConfigureCell>(cellType: T.Type, with value: MChat, for indexPath: IndexPath) -> T? {
-      guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellType.reuseId, for: indexPath) as? T else { return nil }
-      
-      cell.configure(with: value)
-      return cell
-   }
    
    private func setupDataSource() {
       dataSource = UICollectionViewDiffableDataSource<Section, MChat>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
@@ -108,11 +86,9 @@ extension ListViewController {
          
          switch section {
          case .activeChats:
-            
-            return self.configure(cellType: ActiveChatCell.self, with: itemIdentifier, for: indexPath)
-            
+            return self.configure(collectionView: collectionView, cellType: ActiveChatCell.self, with: itemIdentifier, for: indexPath)
          case .waitingChats:
-            return self.configure(cellType: WaitingVhatCell.self, with: itemIdentifier, for: indexPath)
+            return self.configure(collectionView: collectionView, cellType: WaitingVhatCell.self, with: itemIdentifier, for: indexPath)
          }
       })
       

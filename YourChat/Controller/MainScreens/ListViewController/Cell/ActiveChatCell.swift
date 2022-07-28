@@ -27,13 +27,18 @@ class ActiveChatCell: UICollectionViewCell {
 }
 
 extension ActiveChatCell: SelfConfigureCell {
+   func configure<U>(with value: U) where U : Hashable {
+      guard let value = value as? MChat else { return }
+      friendImageView.image = UIImage(named: value.userImageString)
+      friendName.text = value.username
+      lastMessage.text = value.lastMessage
+   }
+   
    
    static var reuseId: String = "ActiveChatCell"
    
    func configure(with value: MChat) {
-      friendImageView.image = UIImage(named: value.userImageString)
-      friendName.text = value.username
-      lastMessage.text = value.lastMessage
+     
    }
    
 }
