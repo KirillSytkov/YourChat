@@ -18,11 +18,14 @@
 		4907983F288EA9470077245A /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4907983E288EA9470077245A /* AuthViewController.swift */; };
 		49079844288EA9490077245A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49079843288EA9490077245A /* Assets.xcassets */; };
 		49079847288EA9490077245A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49079845288EA9490077245A /* LaunchScreen.storyboard */; };
+		496E918A2891712700AB420D /* ActiveChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496E91892891712700AB420D /* ActiveChatCell.swift */; };
+		496E918C2891713200AB420D /* WaitingChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496E918B2891713200AB420D /* WaitingChatCell.swift */; };
 		49915304288F0D3F00D7E86D /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49915303288F0D3F00D7E86D /* SignUpViewController.swift */; };
 		49915306288F108400D7E86D /* OneLineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49915305288F108400D7E86D /* OneLineTextField.swift */; };
 		499ADB872891518100F6E0E9 /* activeChats.json in Resources */ = {isa = PBXBuildFile; fileRef = 499ADB852891518100F6E0E9 /* activeChats.json */; };
 		499ADB882891518100F6E0E9 /* waitingChats.json in Resources */ = {isa = PBXBuildFile; fileRef = 499ADB862891518100F6E0E9 /* waitingChats.json */; };
 		499ADB8A289151A700F6E0E9 /* Bundle + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499ADB89289151A700F6E0E9 /* Bundle + extension.swift */; };
+		49EB541C2892868500F94B3B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EB541B2892868500F94B3B /* GradientView.swift */; };
 		49F45FCB288ECC63008DC461 /* UIButton + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F45FCA288ECC63008DC461 /* UIButton + extension.swift */; };
 		49F45FCD288ECD56008DC461 /* UIView + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F45FCC288ECD56008DC461 /* UIView + extension.swift */; };
 		49F45FCF288ECE25008DC461 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F45FCE288ECE25008DC461 /* Constants.swift */; };
@@ -47,11 +50,14 @@
 		49079843288EA9490077245A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49079846288EA9490077245A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		49079848288EA9490077245A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		496E91892891712700AB420D /* ActiveChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveChatCell.swift; sourceTree = "<group>"; };
+		496E918B2891713200AB420D /* WaitingChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingChatCell.swift; sourceTree = "<group>"; };
 		49915303288F0D3F00D7E86D /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		49915305288F108400D7E86D /* OneLineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneLineTextField.swift; sourceTree = "<group>"; };
 		499ADB852891518100F6E0E9 /* activeChats.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = activeChats.json; sourceTree = "<group>"; };
 		499ADB862891518100F6E0E9 /* waitingChats.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = waitingChats.json; sourceTree = "<group>"; };
 		499ADB89289151A700F6E0E9 /* Bundle + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle + extension.swift"; sourceTree = "<group>"; };
+		49EB541B2892868500F94B3B /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		49F45FCA288ECC63008DC461 /* UIButton + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + extension.swift"; sourceTree = "<group>"; };
 		49F45FCC288ECD56008DC461 /* UIView + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + extension.swift"; sourceTree = "<group>"; };
 		49F45FCE288ECE25008DC461 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -103,6 +109,7 @@
 		4906E52F2890195600846E7E /* MainScreens */ = {
 			isa = PBXGroup;
 			children = (
+				496E91872891710F00AB420D /* Cell */,
 				4906E52B2890186300846E7E /* MainTabBarController.swift */,
 				4906E5272890181600846E7E /* ListViewController.swift */,
 				4906E52D2890192A00846E7E /* PeopleViewController.swift */,
@@ -146,6 +153,7 @@
 		4907984E288EAAA40077245A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				49EB541B2892868500F94B3B /* GradientView.swift */,
 				49F45FDA288ED461008DC461 /* ButtonFormView.swift */,
 				49915305288F108400D7E86D /* OneLineTextField.swift */,
 				4906E523288FE2E200846E7E /* AddPhotoView.swift */,
@@ -199,6 +207,15 @@
 				49079843288EA9490077245A /* Assets.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		496E91872891710F00AB420D /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				496E91892891712700AB420D /* ActiveChatCell.swift */,
+				496E918B2891713200AB420D /* WaitingChatCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		49915309288F119F00D7E86D /* AuthViewController */ = {
@@ -290,9 +307,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4906E5282890181600846E7E /* ListViewController.swift in Sources */,
+				49EB541C2892868500F94B3B /* GradientView.swift in Sources */,
 				49915304288F0D3F00D7E86D /* SignUpViewController.swift in Sources */,
 				4906E52C2890186300846E7E /* MainTabBarController.swift in Sources */,
 				49F45FD1288ECE30008DC461 /* UIFont + extension.swift in Sources */,
+				496E918A2891712700AB420D /* ActiveChatCell.swift in Sources */,
 				4906E5262890079000846E7E /* UISegmentedControl + extension.swift in Sources */,
 				4906E52E2890192A00846E7E /* PeopleViewController.swift in Sources */,
 				49F45FCF288ECE25008DC461 /* Constants.swift in Sources */,
@@ -303,6 +322,7 @@
 				4906E524288FE2E200846E7E /* AddPhotoView.swift in Sources */,
 				49F45FD9288ED1C1008DC461 /* UIImageView + extension.swift in Sources */,
 				499ADB8A289151A700F6E0E9 /* Bundle + extension.swift in Sources */,
+				496E918C2891713200AB420D /* WaitingChatCell.swift in Sources */,
 				4907983F288EA9470077245A /* AuthViewController.swift in Sources */,
 				49915306288F108400D7E86D /* OneLineTextField.swift in Sources */,
 				49F45FDD288EDDD5008DC461 /* UIStackView + extension.swift in Sources */,

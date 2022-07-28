@@ -68,8 +68,8 @@ class ListViewController: UIViewController {
    
    private func setupCollectionView() {
       collectionView  = UICollectionView(frame: view.bounds, collectionViewLayout: createCompositionalLayout())
-      collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: Constants.Cell.activeCell)
-      collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: Constants.Cell.waitingCell)
+      collectionView.register(ActiveChatCell.self, forCellWithReuseIdentifier: ActiveChatCell.reuseId)
+      collectionView.register(WaitingVhatCell.self, forCellWithReuseIdentifier: WaitingVhatCell.reuseId)
       collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
       collectionView.backgroundColor = .systemBackground
       
@@ -81,6 +81,13 @@ class ListViewController: UIViewController {
 
 //MARK: - Data source layout
 extension ListViewController {
+   private func configure<T: SelfConfigureCell>(cellType: T.Type, with value: MChat, for indexPath: IndexPath) -> T? {
+      guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellType.reuseId, for: indexPath) as? T else { return nil }
+      
+      cell.configure(with: value)
+      return cell
+   }
+   
    private func setupDataSource() {
       dataSource = UICollectionViewDiffableDataSource<Section, MChat>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
          
@@ -89,15 +96,10 @@ extension ListViewController {
          switch section {
          case .activeChats:
             
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.Cell.activeCell, for: indexPath)
-            cell.backgroundColor = .systemPurple
-            
-            return cell
+            return self.configure(cellType: ActiveChatCell.self, with: itemIdentifier, for: indexPath)
             
          case .waitingChats:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.Cell.waitingCell, for: indexPath)
-            cell.backgroundColor = .systemRed
-            return cell
+            return self.configure(cellType: WaitingVhatCell.self, with: itemIdentifier, for: indexPath)
          }
       })
    }
