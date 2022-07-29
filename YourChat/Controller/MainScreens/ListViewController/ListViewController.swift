@@ -181,7 +181,7 @@ extension ListViewController {
 //MARK: - SearchBar delegate
 extension ListViewController: UISearchBarDelegate {
    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-      print(searchText)
+      
    }
 }
 
