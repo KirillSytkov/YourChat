@@ -19,6 +19,7 @@
 		49079844288EA9490077245A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49079843288EA9490077245A /* Assets.xcassets */; };
 		49079847288EA9490077245A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49079845288EA9490077245A /* LaunchScreen.storyboard */; };
 		4907AB2E2894597B002A54DE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4907AB2D2894597B002A54DE /* ProfileViewController.swift */; };
+		4907AB3028945DB7002A54DE /* InsertableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4907AB2F28945DB7002A54DE /* InsertableTextField.swift */; };
 		496E918A2891712700AB420D /* ActiveChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496E91892891712700AB420D /* ActiveChatCell.swift */; };
 		496E918C2891713200AB420D /* WaitingChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496E918B2891713200AB420D /* WaitingChatCell.swift */; };
 		497420812892E3C500DCEDBB /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497420802892E3C500DCEDBB /* SectionHeader.swift */; };
@@ -59,6 +60,7 @@
 		49079846288EA9490077245A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		49079848288EA9490077245A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4907AB2D2894597B002A54DE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		4907AB2F28945DB7002A54DE /* InsertableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertableTextField.swift; sourceTree = "<group>"; };
 		496E91892891712700AB420D /* ActiveChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveChatCell.swift; sourceTree = "<group>"; };
 		496E918B2891713200AB420D /* WaitingChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingChatCell.swift; sourceTree = "<group>"; };
 		497420802892E3C500DCEDBB /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				49F45FDA288ED461008DC461 /* ButtonFormView.swift */,
 				49915305288F108400D7E86D /* OneLineTextField.swift */,
 				4906E523288FE2E200846E7E /* AddPhotoView.swift */,
+				4907AB2F28945DB7002A54DE /* InsertableTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -389,6 +392,7 @@
 				496E918A2891712700AB420D /* ActiveChatCell.swift in Sources */,
 				4906E5262890079000846E7E /* UISegmentedControl + extension.swift in Sources */,
 				4906E52E2890192A00846E7E /* PeopleViewController.swift in Sources */,
+				4907AB3028945DB7002A54DE /* InsertableTextField.swift in Sources */,
 				49F45FCF288ECE25008DC461 /* Constants.swift in Sources */,
 				49F45FD7288ED11E008DC461 /* UILabale + extension.swift in Sources */,
 				4907AB2E2894597B002A54DE /* ProfileViewController.swift in Sources */,

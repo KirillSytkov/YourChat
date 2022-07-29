@@ -13,7 +13,7 @@ class ProfileViewController: UIViewController {
    let imageView = UIImageView(image: "human1.jpg", contentMode: .scaleAspectFill)
    let nameLabel = UILabel(text: "Mark Boner", font: .systemFont(ofSize: 20, weight: .light))
    let aboutLabel = UILabel(text: "Hello my friend", font: .systemFont(ofSize: 16, weight: .light))
-   let textField = UITextField()
+   let textField = InsertableTextField()
    
    
    //MARK: - Lyficycles
@@ -21,6 +21,11 @@ class ProfileViewController: UIViewController {
       super.viewDidLoad()
       setup()
       layout()
+   }
+   
+   //MARK: - Actions
+   @objc private func sendMessage(_ sender: UIButton) {
+      
    }
    
    
@@ -42,6 +47,9 @@ class ProfileViewController: UIViewController {
       
       textField.translatesAutoresizingMaskIntoConstraints = false
       textField.borderStyle = .roundedRect
+      if let button = textField.rightView as? UIButton {
+         button.addTarget(self, action: #selector(sendMessage(_:)), for: .touchUpInside)
+      }
       
    }
    
