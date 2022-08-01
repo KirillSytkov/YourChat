@@ -1,20 +1,20 @@
 //
-//  ProfileViewController.swift
+//  ChatRequestViewController.swift
 //  YourChat
 //
-//  Created by Kirill Sytkov on 29.07.2022.
+//  Created by Kirill Sytkov on 01.08.2022.
 //
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+class ChatRequestViewController: UIViewController {
    //MARK: - Properties
    let containerView = UIView()
    let imageView = UIImageView(image: "human1.jpg", contentMode: .scaleAspectFill)
    let nameLabel = UILabel(text: "Mark Boner", font: .systemFont(ofSize: 20, weight: .regular))
-   let aboutLabel = UILabel(text: "Hello my friend", font: .systemFont(ofSize: 16, weight: .light))
-   let textField = InsertableTextField()
-   
+   let aboutLabel = UILabel(text: "You have the opportunity to start a new chat", font: .systemFont(ofSize: 16, weight: .light))
+   let acceptButton = UIButton(title: "Accept".uppercased(), titleColor: .white, backgroundColor: .black, font: .laoSangamMN20(), isShadow: false, cornerRadius: 10)
+   let denyButton = UIButton(title: "Deny".uppercased(), titleColor: .systemPink, backgroundColor: .white, font: .laoSangamMN20(), isShadow: false, cornerRadius: 10)
    
    //MARK: - Lyficycles
    override func viewDidLoad() {
@@ -23,14 +23,12 @@ class ProfileViewController: UIViewController {
       layout()
    }
    
-   //MARK: - Actions
-   @objc private func sendMessage(_ sender: UIButton) {
-      
+   override func viewWillLayoutSubviews() {
+      super.viewWillLayoutSubviews()
+      self.acceptButton.applyGradients(cornerRadius: 10)
    }
    
-   
-   //MARK: - Flow func
-   
+   //MARK: - Flow funcs
    private func setup() {
       self.view.backgroundColor = .systemBackground
       
@@ -45,21 +43,24 @@ class ProfileViewController: UIViewController {
       aboutLabel.translatesAutoresizingMaskIntoConstraints = false
       aboutLabel.numberOfLines = 1
       
-      textField.translatesAutoresizingMaskIntoConstraints = false
-      textField.borderStyle = .roundedRect
-      if let button = textField.rightView as? UIButton {
-         button.addTarget(self, action: #selector(sendMessage(_:)), for: .touchUpInside)
-      }
+      acceptButton.translatesAutoresizingMaskIntoConstraints = false
       
+      denyButton.translatesAutoresizingMaskIntoConstraints = false
+      denyButton.layer.borderWidth = 1.2
+      denyButton.layer.borderColor = UIColor.systemPink.cgColor
    }
    
    private func layout() {
       self.view.addSubview(imageView)
       self.view.addSubview(containerView)
       
+      let buttonsStackView = UIStackView(arrangedSubviews: [acceptButton, denyButton], axis: .horizontal, spacing: 7)
+      buttonsStackView.translatesAutoresizingMaskIntoConstraints = false
+      buttonsStackView.distribution = .fillEqually
+      
       containerView.addSubview(nameLabel)
       containerView.addSubview(aboutLabel)
-      containerView.addSubview(textField)
+      containerView.addSubview(buttonsStackView)
       
       NSLayoutConstraint.activate([
          imageView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -80,21 +81,20 @@ class ProfileViewController: UIViewController {
          aboutLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 24),
          aboutLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -24),
          
-         textField.topAnchor.constraint(equalTo: aboutLabel.bottomAnchor, constant: 10),
-         textField.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 24),
-         textField.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -24),
-         textField.heightAnchor.constraint(equalToConstant: 48),
-         
+         buttonsStackView.topAnchor.constraint(equalTo: aboutLabel.bottomAnchor, constant: 24),
+         buttonsStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 24),
+         buttonsStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -24),
+         buttonsStackView.heightAnchor.constraint(equalToConstant: 48),
       ])
    }
    
-   
 }
+
 
 //MARK: - SwiftUI Preview
 import SwiftUI
 
-struct ProfileViewControllerProvider: PreviewProvider {
+struct CharRequestViewControllerProvider: PreviewProvider {
    
    static var previews: some View {
       ContainerView()
@@ -102,9 +102,9 @@ struct ProfileViewControllerProvider: PreviewProvider {
    }
    
    struct ContainerView: UIViewControllerRepresentable {
-      let viewController = ProfileViewController()
+      let viewController = ChatRequestViewController()
       
-      func makeUIViewController(context: Context) -> some ProfileViewController {
+      func makeUIViewController(context: Context) -> some ChatRequestViewController {
          return viewController
       }
       

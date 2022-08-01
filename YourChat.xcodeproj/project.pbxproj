@@ -33,6 +33,7 @@
 		499ADB872891518100F6E0E9 /* activeChats.json in Resources */ = {isa = PBXBuildFile; fileRef = 499ADB852891518100F6E0E9 /* activeChats.json */; };
 		499ADB882891518100F6E0E9 /* waitingChats.json in Resources */ = {isa = PBXBuildFile; fileRef = 499ADB862891518100F6E0E9 /* waitingChats.json */; };
 		499ADB8A289151A700F6E0E9 /* Bundle + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499ADB89289151A700F6E0E9 /* Bundle + extension.swift */; };
+		49B16E4628982433008E6EF8 /* ChatRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B16E4528982433008E6EF8 /* ChatRequestViewController.swift */; };
 		49B87E8728928EB70069E9C7 /* SelfConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B87E8628928EB70069E9C7 /* SelfConfigureCell.swift */; };
 		49EB541C2892868500F94B3B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EB541B2892868500F94B3B /* GradientView.swift */; };
 		49F45FCB288ECC63008DC461 /* UIButton + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F45FCA288ECC63008DC461 /* UIButton + extension.swift */; };
@@ -74,6 +75,7 @@
 		499ADB852891518100F6E0E9 /* activeChats.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = activeChats.json; sourceTree = "<group>"; };
 		499ADB862891518100F6E0E9 /* waitingChats.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = waitingChats.json; sourceTree = "<group>"; };
 		499ADB89289151A700F6E0E9 /* Bundle + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle + extension.swift"; sourceTree = "<group>"; };
+		49B16E4528982433008E6EF8 /* ChatRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRequestViewController.swift; sourceTree = "<group>"; };
 		49B87E8628928EB70069E9C7 /* SelfConfigureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfConfigureCell.swift; sourceTree = "<group>"; };
 		49EB541B2892868500F94B3B /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		49F45FCA288ECC63008DC461 /* UIButton + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + extension.swift"; sourceTree = "<group>"; };
@@ -127,8 +129,9 @@
 		4906E52F2890195600846E7E /* MainScreens */ = {
 			isa = PBXGroup;
 			children = (
-				4907AB2C28945938002A54DE /* ProfileViewController */,
 				4906E52B2890186300846E7E /* MainTabBarController.swift */,
+				4907AB2C28945938002A54DE /* ProfileViewController */,
+				49B16E4728982436008E6EF8 /* ChatRequestViewController */,
 				497420842892EF7000DCEDBB /* Header */,
 				4974208A2892F66500DCEDBB /* ListViewController */,
 				4974208B2892F67900DCEDBB /* PeopleViewController */,
@@ -301,6 +304,14 @@
 			path = SignUpViewController;
 			sourceTree = "<group>";
 		};
+		49B16E4728982436008E6EF8 /* ChatRequestViewController */ = {
+			isa = PBXGroup;
+			children = (
+				49B16E4528982433008E6EF8 /* ChatRequestViewController.swift */,
+			);
+			path = ChatRequestViewController;
+			sourceTree = "<group>";
+		};
 		49B87E8828928F040069E9C7 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -384,6 +395,7 @@
 			files = (
 				4906E5282890181600846E7E /* ListViewController.swift in Sources */,
 				49EB541C2892868500F94B3B /* GradientView.swift in Sources */,
+				49B16E4628982433008E6EF8 /* ChatRequestViewController.swift in Sources */,
 				497420812892E3C500DCEDBB /* SectionHeader.swift in Sources */,
 				497420902892F8EA00DCEDBB /* UIViewController + extension.swift in Sources */,
 				49915304288F0D3F00D7E86D /* SignUpViewController.swift in Sources */,
