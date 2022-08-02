@@ -22,7 +22,8 @@ class AuthViewController: UIViewController {
    private let googleButton = UIButton(title: "Google", titleColor: .black, backgroundColor: .white, isShadow: true)
    private let emailButton = UIButton(title: "Email", titleColor: .white, backgroundColor: .darkGray)
    private let loginButton = UIButton(title: "Login", titleColor: .systemPink, backgroundColor: .white,font: UIFont.preferredFont(forTextStyle: .title2), isShadow: true)
-   
+   private let signUpVC = SignUpViewController()
+   private let loginVC = LoginViewController()
    
    //MARK: - Lyfecycles
    override func viewDidLoad() {
@@ -33,8 +34,13 @@ class AuthViewController: UIViewController {
    
    
    //MARK: - Actions
+   @objc private func emailButtonTapped(_ sender: UIButton) {
+      present(signUpVC, animated: true)
+   }
    
-   
+   @objc private func loginButtonTapped(_ sender: UIButton) {
+      present(loginVC, animated: true)
+   }
    
    //MARK: - Flow func
    private func setup() {
@@ -48,6 +54,10 @@ class AuthViewController: UIViewController {
       logoLabel.textColor = .darkGray
       
       googleButton.customizedGoogleButton()
+      
+      emailButton.addTarget(self, action: #selector(emailButtonTapped(_:)), for: .touchUpInside)
+      
+      loginButton.addTarget(self, action: #selector(loginButtonTapped(_:)), for: .touchUpInside)
    }
    
 }

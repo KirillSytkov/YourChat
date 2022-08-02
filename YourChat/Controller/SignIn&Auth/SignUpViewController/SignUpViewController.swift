@@ -34,10 +34,22 @@ class SignUpViewController: UIViewController {
    }
    
    //MARK: - Actions
-   
+   @objc private func signupButtonTapepd(_ sender: UIButton) {
+      AuthService.shared.register(email: emailTextFiled.text, password: passwordTextField.text, confirmPassword: confirmTextField.text) { result in
+         switch result {
+            
+         case .success(let user):
+            self.showAlert(with: "Succes", message: "You are registered")
+         case .failure(let error):
+            self.showAlert(with: "Error", message: error.localizedDescription)
+         }
+      }
+   }
    
    //MARK: - flow func
    private func setup() {
+      view.backgroundColor = .systemBackground
+      
       welcomeLabel.translatesAutoresizingMaskIntoConstraints = false
       
       loginButton.translatesAutoresizingMaskIntoConstraints = false
@@ -47,6 +59,8 @@ class SignUpViewController: UIViewController {
       
       passwordTextField.isSecureTextEntry = true
       confirmTextField.isSecureTextEntry = true
+      
+      signUpButton.addTarget(self, action: #selector(signupButtonTapepd(_:)), for: .touchUpInside)
    }
    
    private func layout() {
@@ -83,6 +97,14 @@ class SignUpViewController: UIViewController {
    
 }
 //MARK: - Extensions
+extension UIViewController {
+   func showAlert(with title: String, message: String) {
+      let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+      let okAction = UIAlertAction(title: "Ok", style: .default)
+      alertController.addAction(okAction)
+      present(alertController, animated: true)
+   }
+}
 
 //MARK: - SwiftUI Preview
 import SwiftUI

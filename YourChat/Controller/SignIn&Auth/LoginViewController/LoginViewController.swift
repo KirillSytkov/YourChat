@@ -35,20 +35,34 @@ class LoginViewController: UIViewController {
    }
    
    //MARK: - Actions
-   
+   @objc private  func loginButtonTapped(_ sender: UIButton) {
+      AuthService.shared.login(email: emailTextFiled.text, password: passwordTextField.text) { result in
+         switch result {
+            
+         case .success(let user):
+            self.showAlert(with: "Succes", message: "Hello User")
+         case .failure(let error):
+            self.showAlert(with: "Error", message: error.localizedDescription)
+         }
+      }
+   }
    
    //MARK: - Flow func
    private func setup() {
+      view.backgroundColor = .systemBackground
+      
       welcomeLabel.translatesAutoresizingMaskIntoConstraints = false
       
       googleButton.customizedGoogleButton()
-
-      orLabel.translatesAutoresizingMaskIntoConstraints = false
+      signUpButton.addTarget(self, action: #selector(loginButtonTapped(_:)), for: .touchUpInside)
       
+      orLabel.translatesAutoresizingMaskIntoConstraints = false
+    
       loginButton.translatesAutoresizingMaskIntoConstraints = false
       loginButton.setTitle("Sign up", for: .normal)
       loginButton.setTitleColor(.systemPink, for: .normal)
       loginButton.titleLabel?.font = .avenir20()
+    
       
       passwordTextField.isSecureTextEntry = true
    }
