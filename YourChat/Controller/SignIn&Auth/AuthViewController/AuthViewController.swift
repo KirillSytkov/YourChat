@@ -28,8 +28,13 @@ class AuthViewController: UIViewController {
    //MARK: - Lyfecycles
    override func viewDidLoad() {
       super.viewDidLoad()
+      
+      self.signUpVC.delegate = self
+      self.loginVC.delegate = self
+      
       setup()
       layout()
+     
    }
    
    
@@ -92,6 +97,17 @@ extension AuthViewController {
          
       ])
    }
+}
+
+extension AuthViewController: AuthNaigationDelegate {
+   func toLoginVC() {
+      present(loginVC, animated: true)
+   }
+   
+   func toSignUp() {
+      present(signUpVC, animated: true)
+   }
+     
 }
 
 //MARK: - SwiftUI Preview

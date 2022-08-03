@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class SetupProfileViewController: UIViewController {
    //MARK: - Properties
@@ -22,7 +23,18 @@ class SetupProfileViewController: UIViewController {
    private let sexLabel = UILabel(text: "Sex")
    private let sexSegmentedControl = UISegmentedControl(first: "Male", second: "Femail")
    
-   private let signUpButton = UIButton(title: "Sing up", titleColor: .white, backgroundColor: .darkGray)
+   private let signUpButton = UIButton(title: "Go to chats!", titleColor: .white, backgroundColor: .darkGray)
+   
+   private let currentUser: User
+   
+   init(currentUser: User) {
+      self.currentUser = currentUser
+      super.init(nibName: nil, bundle: nil)
+   }
+   
+   required init?(coder: NSCoder) {
+      fatalError("init(coder:) has not been implemented")
+   }
    
    //MARK: - Lyficycles
    override func viewDidLoad() {
@@ -32,14 +44,34 @@ class SetupProfileViewController: UIViewController {
    }
    
    //MARK: - Actions
+   @objc private func signUpButtonTapped(_ sender: UIButton) {
+      
+      FirestoreService.shared.saveProfileWith(id: currentUser.uid, email: currentUser.email!, username: fullNameTextField.text, avatarImageString: nil, description: aboutTextField.text, sex: sexSegmentedControl.titleForSegment(at: sexSegmentedControl.selectedSegmentIndex)) { result in
+         
+         switch result{
+            
+         case .success(let user):
+            self.showAlert(with: "Succes!", message: "Go to chats now!") {
+                  
+            }
+         case .failure(let error):
+            self.showAlert(with: "Error", message: error.localizedDescription) {
+               
+            }
+         }
+      }
+   }
    
    
    //MARK: - Flow funcs
    private func setup() {
+      self.view.backgroundColor = .systemBackground
+      
       welcomeLabel.translatesAutoresizingMaskIntoConstraints = false
       sexLabel.translatesAutoresizingMaskIntoConstraints = false
       sexSegmentedControl.translatesAutoresizingMaskIntoConstraints = false
       
+      signUpButton.addTarget(self, action: #selector(signUpButtonTapped(_:)), for: .touchUpInside)
    }
    
    private func layout() {
@@ -86,7 +118,7 @@ struct SetupProfileControllerProvider: PreviewProvider {
    }
    
    struct ContainerView: UIViewControllerRepresentable {
-      let viewController = SetupProfileViewController()
+      let viewController = SetupProfileViewController(currentUser: Auth.auth().currentUser!)
       
       func makeUIViewController(context: Context) -> some SetupProfileViewController {
          return viewController

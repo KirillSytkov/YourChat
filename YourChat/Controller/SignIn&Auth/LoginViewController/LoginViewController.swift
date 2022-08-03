@@ -22,10 +22,12 @@ class LoginViewController: UIViewController {
    private let passwordLabel = UILabel(text: "Password")
    private let passwordTextField = OneLineTextField(font: .avenir20())
    
-   private let signUpButton = UIButton(title: "Sing up", titleColor: .white, backgroundColor: .darkGray)
+   private let loginButton = UIButton(title: "Login", titleColor: .white, backgroundColor: .darkGray)
    
    private let alreadyOnboardLabel = UILabel(text: "Need an account?")
-   private let loginButton = UIButton()
+   private let signUpButton = UIButton()
+   
+   weak var delegate: AuthNaigationDelegate?
    
    //MARK: - Lyfecycles
    override func viewDidLoad() {
@@ -40,12 +42,23 @@ class LoginViewController: UIViewController {
          switch result {
             
          case .success(let user):
-            self.showAlert(with: "Succes", message: "Hello User")
+            self.showAlert(with: "Succes", message: "Hello User") {
+               
+            }
          case .failure(let error):
-            self.showAlert(with: "Error", message: error.localizedDescription)
+            self.showAlert(with: "Error", message: error.localizedDescription) {
+               
+            }
          }
       }
    }
+   
+   @objc private  func signUpButtonTapped(_ sender: UIButton) {
+      dismiss(animated: true) {
+         self.delegate?.toSignUp()
+      }
+   }
+   
    
    //MARK: - Flow func
    private func setup() {
@@ -54,15 +67,15 @@ class LoginViewController: UIViewController {
       welcomeLabel.translatesAutoresizingMaskIntoConstraints = false
       
       googleButton.customizedGoogleButton()
-      signUpButton.addTarget(self, action: #selector(loginButtonTapped(_:)), for: .touchUpInside)
+      loginButton.addTarget(self, action: #selector(loginButtonTapped(_:)), for: .touchUpInside)
       
       orLabel.translatesAutoresizingMaskIntoConstraints = false
     
-      loginButton.translatesAutoresizingMaskIntoConstraints = false
-      loginButton.setTitle("Sign up", for: .normal)
-      loginButton.setTitleColor(.systemPink, for: .normal)
-      loginButton.titleLabel?.font = .avenir20()
-    
+      signUpButton.translatesAutoresizingMaskIntoConstraints = false
+      signUpButton.setTitle("Sign up", for: .normal)
+      signUpButton.setTitleColor(.systemPink, for: .normal)
+      signUpButton.titleLabel?.font = .avenir20()
+      signUpButton.addTarget(self, action: #selector(signUpButtonTapped(_:)), for: .touchUpInside)
       
       passwordTextField.isSecureTextEntry = true
    }
@@ -73,9 +86,9 @@ class LoginViewController: UIViewController {
       let emailStackView = UIStackView(arrangedSubviews: [emailLabel,emailTextFiled], axis: .vertical, spacing: 5)
       let passwordStackView = UIStackView(arrangedSubviews: [passwordLabel, passwordTextField], axis: .vertical, spacing: 5)
       
-      let stackView = UIStackView(arrangedSubviews: [googleView, orLabel, emailStackView, passwordStackView, signUpButton], axis: .vertical, spacing: 30)
+      let stackView = UIStackView(arrangedSubviews: [googleView, orLabel, emailStackView, passwordStackView, loginButton], axis: .vertical, spacing: 30)
       
-      let bottomStackView = UIStackView(arrangedSubviews: [alreadyOnboardLabel,loginButton], axis: .horizontal, spacing: 20)
+      let bottomStackView = UIStackView(arrangedSubviews: [alreadyOnboardLabel,signUpButton], axis: .horizontal, spacing: 20)
       
       stackView.translatesAutoresizingMaskIntoConstraints = false
       bottomStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -92,7 +105,7 @@ class LoginViewController: UIViewController {
          stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
          stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
          
-         signUpButton.heightAnchor.constraint(equalToConstant: 60),
+         loginButton.heightAnchor.constraint(equalToConstant: 60),
             
          bottomStackView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 50),
          bottomStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),

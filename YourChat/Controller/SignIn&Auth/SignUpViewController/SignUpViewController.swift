@@ -26,6 +26,7 @@ class SignUpViewController: UIViewController {
    private let alreadyOnboardLabel = UILabel(text: "Already onboard?")
    private let loginButton = UIButton()
    
+   weak var delegate: AuthNaigationDelegate?
    //MARK: - Lyficycles
    override func viewDidLoad() {
       super.viewDidLoad()
@@ -39,12 +40,23 @@ class SignUpViewController: UIViewController {
          switch result {
             
          case .success(let user):
-            self.showAlert(with: "Succes", message: "You are registered")
+            self.showAlert(with: "Succes", message: "You are registered") {
+               self.present(SetupProfileViewController(currentUser: user), animated: true)
+            }
          case .failure(let error):
-            self.showAlert(with: "Error", message: error.localizedDescription)
+            self.showAlert(with: "Error", message: error.localizedDescription) {
+               
+            }
          }
       }
    }
+   
+   @objc private func loginButtonTapped(_ sender: UIButton) {
+      dismiss(animated: true) {
+         self.delegate?.toLoginVC()
+      }
+   }
+   
    
    //MARK: - flow func
    private func setup() {
@@ -52,15 +64,16 @@ class SignUpViewController: UIViewController {
       
       welcomeLabel.translatesAutoresizingMaskIntoConstraints = false
       
-      loginButton.translatesAutoresizingMaskIntoConstraints = false
-      loginButton.setTitle("Login", for: .normal)
-      loginButton.setTitleColor(.systemPink, for: .normal)
-      loginButton.titleLabel?.font = .avenir20()
+      signUpButton.addTarget(self, action: #selector(signupButtonTapepd(_:)), for: .touchUpInside)
       
       passwordTextField.isSecureTextEntry = true
       confirmTextField.isSecureTextEntry = true
       
-      signUpButton.addTarget(self, action: #selector(signupButtonTapepd(_:)), for: .touchUpInside)
+      loginButton.translatesAutoresizingMaskIntoConstraints = false
+      loginButton.setTitle("Login", for: .normal)
+      loginButton.setTitleColor(.systemPink, for: .normal)
+      loginButton.titleLabel?.font = .avenir20()
+      loginButton.addTarget(self, action: #selector(loginButtonTapped(_:)), for: .touchUpInside)
    }
    
    private func layout() {
@@ -98,9 +111,12 @@ class SignUpViewController: UIViewController {
 }
 //MARK: - Extensions
 extension UIViewController {
-   func showAlert(with title: String, message: String) {
+   func showAlert(with title: String, message: String, completion: @escaping () -> Void) {
       let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-      let okAction = UIAlertAction(title: "Ok", style: .default)
+      let okAction = UIAlertAction(title: "Ok", style: .default) { _ in
+         completion()
+      }
+      
       alertController.addAction(okAction)
       present(alertController, animated: true)
    }
