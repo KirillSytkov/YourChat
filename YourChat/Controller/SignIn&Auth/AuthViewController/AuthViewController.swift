@@ -49,6 +49,7 @@ class AuthViewController: UIViewController {
    
    //MARK: - Flow func
    private func setup() {
+      self.view.backgroundColor = .systemBackground
       stackView.translatesAutoresizingMaskIntoConstraints = false
       stackView.axis = .vertical
       stackView.spacing = 30
