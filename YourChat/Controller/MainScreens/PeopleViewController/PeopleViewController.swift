@@ -6,13 +6,16 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class PeopleViewController: UIViewController {
    //MARK: - Properties
    private let searchController = UISearchController(searchResultsController: nil)
-   let users = Bundle.main.decode([MUser].self, from: "users.json")
-   var collectionView: UICollectionView!
-   var dataSource: UICollectionViewDiffableDataSource<Section,MUser>!
+//   let users = Bundle.main.decode([MUser].self, from: "users.json")
+   private let users = [MUser]()
+   private let currentUser: MUser
+   private var collectionView: UICollectionView!
+   private var dataSource: UICollectionViewDiffableDataSource<Section,MUser>!
    
    enum Section: Int, CaseIterable {
       case users
@@ -23,6 +26,16 @@ class PeopleViewController: UIViewController {
             return "\(usersCount) people nearby"
          }
       }
+   }
+   
+   init(currentUser: MUser) {
+      self.currentUser = currentUser
+      super.init(nibName: nil, bundle: nil)
+      self.title = currentUser.username
+   }
+   
+   required init?(coder: NSCoder) {
+      fatalError("init(coder:) has not been implemented")
    }
    
    
@@ -38,12 +51,29 @@ class PeopleViewController: UIViewController {
    
    
    //MARK: - Actions
+   @objc func logoutButtonTapper(_ sender: UIButton) {
+      let ac = UIAlertController(title: nil, message: "Are you sure you want to sign out?", preferredStyle: .alert)
+      ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+      ac.addAction(UIAlertAction(title: "Sign out", style: .destructive, handler: { _ in
+         do {
+            try Auth.auth().signOut()
+            let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+            window?.rootViewController = AuthViewController()
+            
+         } catch {
+            debugPrint(error.localizedDescription)
+         }
+            
+      }))
+      present(ac, animated: true, completion: nil)
+   }
    
    
    
    //MARK: - Flow func
    private func setup() {
       view.backgroundColor = .systemGroupedBackground
+      navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(logoutButtonTapper(_:)))
    }
    
    private func setupSearchBar() {
@@ -141,7 +171,9 @@ extension PeopleViewController {
       
       dataSource?.supplementaryViewProvider = { collectionView, kind, indexPath in
          guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SectionHeader.reuseId, for: indexPath) as? SectionHeader else { return nil }
+         
          guard let section = Section(rawValue: indexPath.section) else  { return nil }
+         
          let items = self.dataSource.snapshot().itemIdentifiers(inSection: .users)
          
          sectionHeader.configure(text: section.description(usersCount: items.count), font: .systemFont(ofSize: 36,weight: .light), textColor: .systemGray)
@@ -153,11 +185,11 @@ extension PeopleViewController {
       let filtered = users.filter { user in
          user.contains(filter: searchText)
       }
-      
+
       var snapshot  = NSDiffableDataSourceSnapshot<Section, MUser>()
       snapshot.appendSections([.users])
       snapshot.appendItems(filtered, toSection: .users)
-      
+
       dataSource?.apply(snapshot, animatingDifferences: true)
    }
 }

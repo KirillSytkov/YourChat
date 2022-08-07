@@ -24,8 +24,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             switch result {
             case .success(let user):
+               let mainTabBar = MainTabBarController(currentUser: user)
+               mainTabBar.modalPresentationStyle = .fullScreen
+               
                self.window?.makeKeyAndVisible()
-               self.window?.rootViewController = MainTabBarController()
+               self.window?.rootViewController = mainTabBar
                
             case .failure(let error):
                self.window?.makeKeyAndVisible()

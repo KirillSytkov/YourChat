@@ -10,8 +10,9 @@ import UIKit
 class ListViewController: UIViewController {
    //MARK: - Properties
    
-   let activeChats = Bundle.main.decode([MChat].self, from: "activeChats.json")
-   let waitingChats = Bundle.main.decode([MChat].self, from: "waitingChats.json")
+   private let activeChats = Bundle.main.decode([MChat].self, from: "activeChats.json")
+   private let waitingChats = Bundle.main.decode([MChat].self, from: "waitingChats.json")
+   private let currentUser: MUser
    
    enum Section: Int, CaseIterable {
       case waitingChats
@@ -33,6 +34,15 @@ class ListViewController: UIViewController {
    
    private let searchController = UISearchController(searchResultsController: nil)
    
+   init(currentUser: MUser) {
+      self.currentUser = currentUser
+      super.init(nibName: nil, bundle: nil)
+      self.title = currentUser.username
+   }
+   
+   required init?(coder: NSCoder) {
+      fatalError("init(coder:) has not been implemented")
+   }
    
    //MARK: - Lyfecycles
    override func viewDidLoad() {

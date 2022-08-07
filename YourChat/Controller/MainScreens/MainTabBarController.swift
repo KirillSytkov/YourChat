@@ -13,6 +13,16 @@ class MainTabBarController: UITabBarController {
    
    private let peopleImage = UIImage(systemName: "person.3")
    private let convImage = UIImage(systemName: "bubble.left.and.bubble.right")
+   private let currentUser: MUser
+   
+   init(currentUser: MUser = MUser(username: "Test", email: "Test", avatarStringURL: "test", description: "Test", sex: "male", id: "test")) {
+      self.currentUser = currentUser
+      super.init(nibName: nil, bundle: nil)
+   }
+   
+   required init?(coder: NSCoder) {
+      fatalError("init(coder:) has not been implemented")
+   }
    
    //MARK: - Lyfecycles
    override func viewDidLoad() {
@@ -24,8 +34,8 @@ class MainTabBarController: UITabBarController {
    }
    
    private func setupViews() {
-      let listVC = ListViewController()
-      let peopleVC = PeopleViewController()
+      let listVC = ListViewController(currentUser: currentUser)
+      let peopleVC = PeopleViewController(currentUser: currentUser)
       
       viewControllers = [generateNavigationController(rootVC: peopleVC, title: "People", image: peopleImage!),
                          generateNavigationController(rootVC: listVC, title: "Conversations", image: convImage!),
