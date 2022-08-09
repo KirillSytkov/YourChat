@@ -9,5 +9,6 @@ target 'YourChat' do
 pod 'FirebaseAnalytics'
 pod 'FirebaseAuth'
 pod 'FirebaseFirestore'
+pod 'GoogleSignIn'
 
 end

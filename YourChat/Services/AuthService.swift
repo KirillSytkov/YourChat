@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseCore
 import FirebaseAuth
+import GoogleSignIn
 
 class AuthService {
    
@@ -39,12 +40,16 @@ class AuthService {
       }
    }
    
+   func googleLogin(view: UIViewController, completion: @escaping (Result<User,Error>) -> Void) {
+
+   }
+   
    func login(email: String?, password: String?, completion: @escaping (Result<User,Error>) -> Void) {
       guard let email = email, let password = password else {
          completion(.failure(AuthError.notFilled))
          return
       }
-
+      
       auth.signIn(withEmail: email, password: password) { result, error in
          guard let result = result else {
             completion(.failure(error!))

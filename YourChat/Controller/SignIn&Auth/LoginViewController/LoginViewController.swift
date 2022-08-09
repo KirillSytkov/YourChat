@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GoogleSignIn
 
 class LoginViewController: UIViewController {
    //MARK: - Properties
@@ -69,6 +70,9 @@ class LoginViewController: UIViewController {
       }
    }
    
+   @objc private func googleButtonTapped(_ sender: UIButton) {
+     
+   }
    
    //MARK: - Flow func
    private func setup() {
@@ -77,6 +81,8 @@ class LoginViewController: UIViewController {
       welcomeLabel.translatesAutoresizingMaskIntoConstraints = false
       
       googleButton.customizedGoogleButton()
+      googleButton.addTarget(self, action: #selector(googleButtonTapped(_:)), for: .touchUpInside)
+      
       loginButton.addTarget(self, action: #selector(loginButtonTapped(_:)), for: .touchUpInside)
       
       orLabel.translatesAutoresizingMaskIntoConstraints = false

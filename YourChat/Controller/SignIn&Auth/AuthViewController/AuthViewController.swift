@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import GoogleSignIn
+import FirebaseAuth
+import FirebaseCore
 
 class AuthViewController: UIViewController {
    //MARK: - Properties
@@ -47,8 +50,38 @@ class AuthViewController: UIViewController {
       present(loginVC, animated: true)
    }
    
+   @objc private func googleButtonTapped(_ sender: UIButton) {
+      
+      googleLogin { result in
+         switch result {
+            
+         case .success(let user):
+            FirestoreService.shared.getUserData(user: user) { result in
+               switch result {
+                  
+               case .success(let muser):
+                  self.showAlert(with: "Succes", message: "You are registred") {
+                     let mainTabBar = MainTabBarController(currentUser: muser)
+                     self.present(mainTabBar, animated: true)
+                  }
+               case .failure(_):
+                  self.showAlert(with: "Succes", message: "You are register") {
+                     self.present(SetupProfileViewController(currentUser: user), animated: true)
+                  }
+               }
+            }
+            
+         case .failure(let error):
+            self.showAlert(with: "Error", message: error.localizedDescription) {
+               
+            }
+         }
+      }
+   }
+   
    //MARK: - Flow func
    private func setup() {
+      
       self.view.backgroundColor = .systemBackground
       stackView.translatesAutoresizingMaskIntoConstraints = false
       stackView.axis = .vertical
@@ -60,6 +93,7 @@ class AuthViewController: UIViewController {
       logoLabel.textColor = .darkGray
       
       googleButton.customizedGoogleButton()
+      googleButton.addTarget(self, action: #selector(googleButtonTapped(_:)), for: .touchUpInside)
       
       emailButton.addTarget(self, action: #selector(emailButtonTapped(_:)), for: .touchUpInside)
       
@@ -109,6 +143,44 @@ extension AuthViewController: AuthNaigationDelegate {
       present(signUpVC, animated: true)
    }
      
+}
+
+extension AuthViewController {
+   
+   func googleLogin( completion: @escaping (Result<User,Error>) -> Void) {
+
+      guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+      
+      let config = GIDConfiguration(clientID: clientID)
+      
+      GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { [unowned self] user, error in
+         
+         if let error = error {
+            completion(.failure(error))
+            return
+         }
+         
+         guard
+            let authentication = user?.authentication,
+            let idToken = authentication.idToken
+         else {
+            return
+         }
+         
+         let credential = GoogleAuthProvider.credential(withIDToken: idToken,
+                                                        accessToken: authentication.accessToken)
+         
+         Auth.auth().signIn(with: credential) { result, error in
+            guard let result = result else {
+               completion(.failure(error!))
+               return
+            }
+            completion(.success(result.user))
+         }
+         
+      }
+   }
+
 }
 
 //MARK: - SwiftUI Preview
