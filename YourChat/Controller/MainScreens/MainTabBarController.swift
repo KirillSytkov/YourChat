@@ -34,6 +34,7 @@ class MainTabBarController: UITabBarController {
    }
    
    private func setupViews() {
+      
       let listVC = ListViewController(currentUser: currentUser)
       let peopleVC = PeopleViewController(currentUser: currentUser)
       
@@ -44,6 +45,7 @@ class MainTabBarController: UITabBarController {
    
    private func setupTabBar() {
       tabBar.tintColor = .systemPurple
+      
    }
    
    private func generateNavigationController(rootVC: UIViewController, title: String, image: UIImage) -> UIViewController {

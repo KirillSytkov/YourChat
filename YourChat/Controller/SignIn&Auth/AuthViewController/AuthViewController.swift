@@ -52,7 +52,7 @@ class AuthViewController: UIViewController {
    
    @objc private func googleButtonTapped(_ sender: UIButton) {
       
-      googleLogin { result in
+      AuthService.shared.googleLogin(view: self) { result in
          switch result {
             
          case .success(let user):
@@ -60,6 +60,9 @@ class AuthViewController: UIViewController {
                switch result {
                   
                case .success(let muser):
+                  let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+                  window?.rootViewController = AuthViewController()
+                  
                   self.showAlert(with: "Succes", message: "You are registred") {
                      let mainTabBar = MainTabBarController(currentUser: muser)
                      self.present(mainTabBar, animated: true)
@@ -143,44 +146,6 @@ extension AuthViewController: AuthNaigationDelegate {
       present(signUpVC, animated: true)
    }
      
-}
-
-extension AuthViewController {
-   
-   func googleLogin( completion: @escaping (Result<User,Error>) -> Void) {
-
-      guard let clientID = FirebaseApp.app()?.options.clientID else { return }
-      
-      let config = GIDConfiguration(clientID: clientID)
-      
-      GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { [unowned self] user, error in
-         
-         if let error = error {
-            completion(.failure(error))
-            return
-         }
-         
-         guard
-            let authentication = user?.authentication,
-            let idToken = authentication.idToken
-         else {
-            return
-         }
-         
-         let credential = GoogleAuthProvider.credential(withIDToken: idToken,
-                                                        accessToken: authentication.accessToken)
-         
-         Auth.auth().signIn(with: credential) { result, error in
-            guard let result = result else {
-               completion(.failure(error!))
-               return
-            }
-            completion(.success(result.user))
-         }
-         
-      }
-   }
-
 }
 
 //MARK: - SwiftUI Preview

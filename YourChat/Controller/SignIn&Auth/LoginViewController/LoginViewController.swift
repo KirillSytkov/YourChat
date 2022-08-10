@@ -30,6 +30,7 @@ class LoginViewController: UIViewController {
    
    weak var delegate: AuthNaigationDelegate?
    
+   
    //MARK: - Lyfecycles
    override func viewDidLoad() {
       super.viewDidLoad()
@@ -48,8 +49,9 @@ class LoginViewController: UIViewController {
                   switch result {
                   case .success(let muser):
                      let mainTabBar = MainTabBarController(currentUser: muser)
-                     mainTabBar.modalPresentationStyle = .fullScreen
-                     self.present(mainTabBar, animated: true)
+                     let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+                     window?.rootViewController = mainTabBar
+                     UIView.transition(with: window!, duration: 0.3, options: .transitionCrossDissolve, animations: nil, completion: nil)
                   case .failure(let error):
                      self.present(SetupProfileViewController(currentUser:user), animated: true)
                   }
@@ -71,7 +73,33 @@ class LoginViewController: UIViewController {
    }
    
    @objc private func googleButtonTapped(_ sender: UIButton) {
-     
+      AuthService.shared.googleLogin(view: self) { result in
+         switch result {
+            
+         case .success(let user):
+            FirestoreService.shared.getUserData(user: user) { result in
+               switch result {
+                  
+               case .success(let muser):
+                  self.showAlert(with: "Succes", message: "You are registred") {
+                     let mainTabBar = MainTabBarController(currentUser: muser)
+                     let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+                     window?.rootViewController = mainTabBar
+                     UIView.transition(with: window!, duration: 0.3, options: .transitionCrossDissolve, animations: nil, completion: nil)
+                  }
+               case .failure(_):
+                  self.showAlert(with: "Succes", message: "You are register") {
+                     self.present(SetupProfileViewController(currentUser: user), animated: true)
+                  }
+               }
+            }
+            
+         case .failure(let error):
+            self.showAlert(with: "Error", message: error.localizedDescription) {
+               
+            }
+         }
+      }
    }
    
    //MARK: - Flow func
