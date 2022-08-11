@@ -34,26 +34,42 @@ class FirestoreService {
         }
     }
     
-    func saveProfileWith(id: String, email: String, username: String?, avatarImageString: String?, description: String?, sex: String?, completion: @escaping (Result<MUser, Error>) -> Void) {
+    func saveProfileWith(id: String, email: String, username: String?, avatarImage: UIImage?, description: String?, sex: String?, completion: @escaping (Result<MUser, Error>) -> Void) {
         
        guard Validators.isFilled(userName: username, description: description, sex: sex) else {
             completion(.failure(UserError.notFilled))
             return
         }
-        
-        let muser = MUser(username: username!,
+         
+       guard avatarImage != UIImage(named: "avatar.png") else {
+          completion(.failure(UserError.photoNotExist))
+          return
+       }
+       
+        var muser = MUser(username: username!,
                           email: email,
                           avatarStringURL: "not exist",
                           description: description!,
                           sex: sex!,
                           id: id)
-        self.usersRef.document(muser.id).setData(muser.representation) { (error) in
-            if let error = error {
-                completion(.failure(error))
-            } else {
-                completion(.success(muser))
-            }
-        }
-    }
+       
+       StorageService.shared.upload(photo: avatarImage!) { result in
+          switch result {
+             
+          case .success(let url):
+             muser.avatarStringURL = url.absoluteString
+             self.usersRef.document(muser.id).setData(muser.representation) { (error) in
+                 if let error = error {
+                     completion(.failure(error))
+                 } else {
+                     completion(.success(muser))
+                 }
+             }
+             
+          case .failure(let error):
+             completion(.failure(error))
+          }
+       } // StorageService
+    }// saveProfileWith
 }
 

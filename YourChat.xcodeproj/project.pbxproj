@@ -53,6 +53,8 @@
 		49F45FD9288ED1C1008DC461 /* UIImageView + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F45FD8288ED1C1008DC461 /* UIImageView + extension.swift */; };
 		49F45FDB288ED461008DC461 /* ButtonFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F45FDA288ED461008DC461 /* ButtonFormView.swift */; };
 		49F45FDD288EDDD5008DC461 /* UIStackView + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F45FDC288EDDD5008DC461 /* UIStackView + extension.swift */; };
+		49FAF64A28A5593800D806B9 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FAF64928A5593800D806B9 /* StorageService.swift */; };
+		49FAF64C28A561BD00D806B9 /* UIImage + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FAF64B28A561BD00D806B9 /* UIImage + extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,6 +106,8 @@
 		49F45FD8288ED1C1008DC461 /* UIImageView + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView + extension.swift"; sourceTree = "<group>"; };
 		49F45FDA288ED461008DC461 /* ButtonFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonFormView.swift; sourceTree = "<group>"; };
 		49F45FDC288EDDD5008DC461 /* UIStackView + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView + extension.swift"; sourceTree = "<group>"; };
+		49FAF64928A5593800D806B9 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		49FAF64B28A561BD00D806B9 /* UIImage + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + extension.swift"; sourceTree = "<group>"; };
 		826D06B2807172E2CD89382B /* Pods_YourChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YourChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD587A92B32598BD7FE3AA1C /* Pods-YourChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YourChat.release.xcconfig"; path = "Target Support Files/Pods-YourChat/Pods-YourChat.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -186,12 +190,12 @@
 				49079845288EA9490077245A /* LaunchScreen.storyboard */,
 				494F8E322899866D0099BB11 /* Helpers */,
 				49A0AF4B2899751C00C00A7C /* Services */,
-				49079853288EAABF0077245A /* Resources */,
 				4907984F288EAAA90077245A /* Extension */,
 				49B87E8828928F040069E9C7 /* Protocols */,
 				49079852288EAAB50077245A /* Controller */,
 				4907984E288EAAA40077245A /* Views */,
 				49079851288EAAB30077245A /* Data */,
+				49079853288EAABF0077245A /* Resources */,
 				49079848288EA9490077245A /* Info.plist */,
 				49B16E4828982B87008E6EF8 /* GoogleService-Info.plist */,
 			);
@@ -214,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				499ADB89289151A700F6E0E9 /* Bundle + extension.swift */,
+				49FAF64B28A561BD00D806B9 /* UIImage + extension.swift */,
 				49F45FCA288ECC63008DC461 /* UIButton + extension.swift */,
 				4906E5252890079000846E7E /* UISegmentedControl + extension.swift */,
 				49F45FDC288EDDD5008DC461 /* UIStackView + extension.swift */,
@@ -345,6 +350,7 @@
 			children = (
 				49DF63772898307600E3CCFE /* AuthService.swift */,
 				491FF792289ABCA500CA7391 /* FirestoreService.swift */,
+				49FAF64928A5593800D806B9 /* StorageService.swift */,
 				49079850288EAAAD0077245A /* Model */,
 			);
 			path = Services;
@@ -507,6 +513,7 @@
 				4906E5282890181600846E7E /* ListViewController.swift in Sources */,
 				499ABC77289AC0CC00EFEE2F /* UserError.swift in Sources */,
 				49EB541C2892868500F94B3B /* GradientView.swift in Sources */,
+				49FAF64A28A5593800D806B9 /* StorageService.swift in Sources */,
 				49B16E4628982433008E6EF8 /* ChatRequestViewController.swift in Sources */,
 				497420812892E3C500DCEDBB /* SectionHeader.swift in Sources */,
 				497420902892F8EA00DCEDBB /* UIViewController + extension.swift in Sources */,
@@ -526,6 +533,7 @@
 				49F45FCD288ECD56008DC461 /* UIView + extension.swift in Sources */,
 				4906E524288FE2E200846E7E /* AddPhotoView.swift in Sources */,
 				497420862892F04100DCEDBB /* MChatModel.swift in Sources */,
+				49FAF64C28A561BD00D806B9 /* UIImage + extension.swift in Sources */,
 				49C7E86628A2E04B00D16508 /* UIAplication + Extension.swift in Sources */,
 				49F45FD9288ED1C1008DC461 /* UIImageView + extension.swift in Sources */,
 				499ADB8A289151A700F6E0E9 /* Bundle + extension.swift in Sources */,

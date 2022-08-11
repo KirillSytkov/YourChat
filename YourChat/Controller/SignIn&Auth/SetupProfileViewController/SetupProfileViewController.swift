@@ -12,7 +12,7 @@ class SetupProfileViewController: UIViewController {
    //MARK: - Properties
    private let welcomeLabel = UILabel(text: "Set up profile", font: .avenir26())
    
-   private let fillImageView = AddPhotoView()
+   private let fullImageView = AddPhotoView()
    
    private let fullNameLabel = UILabel(text: "Full name")
    private let fullNameTextField = OneLineTextField(font: .avenir20())
@@ -50,7 +50,7 @@ class SetupProfileViewController: UIViewController {
    //MARK: - Actions
    @objc private func signUpButtonTapped(_ sender: UIButton) {
       
-      FirestoreService.shared.saveProfileWith(id: currentUser.uid, email: currentUser.email!, username: fullNameTextField.text, avatarImageString: nil, description: aboutTextField.text, sex: sexSegmentedControl.titleForSegment(at: sexSegmentedControl.selectedSegmentIndex)) { result in
+      FirestoreService.shared.saveProfileWith(id: currentUser.uid, email: currentUser.email!, username: fullNameTextField.text, avatarImage: fullImageView.circleImageView.image, description: aboutTextField.text, sex: sexSegmentedControl.titleForSegment(at: sexSegmentedControl.selectedSegmentIndex)) { result in
          
          switch result{
             
@@ -68,10 +68,19 @@ class SetupProfileViewController: UIViewController {
       }
    }
    
+   @objc private func plusButtonTapped(_ sender: UIButton) {
+      let imagePickerController = UIImagePickerController()
+      imagePickerController.delegate = self
+      imagePickerController.sourceType = .photoLibrary
+      present(imagePickerController, animated: true)
+      
+   }
    
    //MARK: - Flow funcs
    private func setup() {
       self.view.backgroundColor = .systemBackground
+      
+      fullImageView.plusButton.addTarget(self, action: #selector(plusButtonTapped(_:)), for: .touchUpInside)
       
       welcomeLabel.translatesAutoresizingMaskIntoConstraints = false
       sexLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -90,7 +99,7 @@ class SetupProfileViewController: UIViewController {
       stackView.translatesAutoresizingMaskIntoConstraints = false
       
       view.addSubview(welcomeLabel)
-      view.addSubview(fillImageView)
+      view.addSubview(fullImageView)
       view.addSubview(stackView)
       
       
@@ -98,8 +107,8 @@ class SetupProfileViewController: UIViewController {
          welcomeLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
          welcomeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
          
-         fillImageView.bottomAnchor.constraint(equalTo: stackView.topAnchor, constant: -20),
-         fillImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+         fullImageView.bottomAnchor.constraint(equalTo: stackView.topAnchor, constant: -20),
+         fullImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
          stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 80),
          stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
          stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
@@ -111,7 +120,14 @@ class SetupProfileViewController: UIViewController {
 }
 
 //MARK: - Extensions
-
+extension SetupProfileViewController:UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+      picker.dismiss(animated: true)
+      guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
+      fullImageView.circleImageView.image = image
+      
+   }
+}
 
 //MARK: - SwiftUI Preview
 import SwiftUI
