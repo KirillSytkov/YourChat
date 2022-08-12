@@ -7,12 +7,13 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseFirestore
 
 class PeopleViewController: UIViewController {
    //MARK: - Properties
    private let searchController = UISearchController(searchResultsController: nil)
-//   let users = Bundle.main.decode([MUser].self, from: "users.json")
-   private let users = [MUser]()
+   private var users = [MUser]()
+   private var usersListner: ListenerRegistration?
    private let currentUser: MUser
    private var collectionView: UICollectionView!
    private var dataSource: UICollectionViewDiffableDataSource<Section,MUser>!
@@ -34,6 +35,10 @@ class PeopleViewController: UIViewController {
       self.title = currentUser.username
    }
    
+   deinit {
+      usersListner?.remove()
+   }
+   
    required init?(coder: NSCoder) {
       fatalError("init(coder:) has not been implemented")
    }
@@ -46,7 +51,7 @@ class PeopleViewController: UIViewController {
       setupSearchBar()
       setupCollectionView()
       setupDataSource()
-      reloadData(with: nil)
+      addUsersListener()
    }
    
    
@@ -98,6 +103,19 @@ class PeopleViewController: UIViewController {
       
    }
     
+   private func addUsersListener() {
+      usersListner = ListenerService.shared.usersObserve(users: users, completion: { result in
+         switch result {
+         case .success(let users):
+            self.users = users
+            self.reloadData(with: nil)
+         case .failure(let error):
+            self.showAlert(with: "Error", message: error.localizedDescription) {
+               
+            }
+         }
+      })
+   }
 }
 
 
