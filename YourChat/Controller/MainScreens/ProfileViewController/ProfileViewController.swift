@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ProfileViewController: UIViewController {
    //MARK: - Properties
@@ -14,6 +15,20 @@ class ProfileViewController: UIViewController {
    let nameLabel = UILabel(text: "Mark Boner", font: .systemFont(ofSize: 20, weight: .regular))
    let aboutLabel = UILabel(text: "Hello my friend", font: .systemFont(ofSize: 16, weight: .light))
    let textField = InsertableTextField()
+   
+   private let user: MUser
+   
+   init(user: MUser) {
+      self.user = user
+      self.nameLabel.text = user.username
+      self.aboutLabel.text = user.description
+      self.imageView.sd_setImage(with: URL(string: user.avatarStringURL))
+      super.init(nibName: nil, bundle: nil)
+   }
+   
+   required init?(coder: NSCoder) {
+      fatalError("init(coder:) has not been implemented")
+   }
    
    
    //MARK: - Lyficycles
@@ -25,7 +40,24 @@ class ProfileViewController: UIViewController {
    
    //MARK: - Actions
    @objc private func sendMessage(_ sender: UIButton) {
+      guard let message = textField.text, !message.isEmpty else { return }
       
+      self.dismiss(animated: true) {
+         FirestoreService.shared.createWaitingChat(message: message, receiver: self.user) { result in
+            switch result {
+               
+            case .success():
+               UIApplication.getTopViewController()?.showAlert(with: "Succes", message: "Message for \(self.user.username) has been sent", completion: {
+                  
+               })
+            case .failure(let error):
+               UIApplication.getTopViewController()?.showAlert(with: "Error", message: error.localizedDescription, completion: {
+                  
+               })
+            }
+         }
+       
+      }
    }
    
    
@@ -89,27 +121,4 @@ class ProfileViewController: UIViewController {
    }
    
    
-}
-
-//MARK: - SwiftUI Preview
-import SwiftUI
-
-struct ProfileViewControllerProvider: PreviewProvider {
-   
-   static var previews: some View {
-      ContainerView()
-         .edgesIgnoringSafeArea(.all)
-   }
-   
-   struct ContainerView: UIViewControllerRepresentable {
-      let viewController = ProfileViewController()
-      
-      func makeUIViewController(context: Context) -> some ProfileViewController {
-         return viewController
-      }
-      
-      func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-         
-      }
-   }
 }

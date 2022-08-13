@@ -110,17 +110,7 @@ class SignUpViewController: UIViewController {
    
 }
 //MARK: - Extensions
-extension UIViewController {
-   func showAlert(with title: String, message: String, completion: @escaping () -> Void) {
-      let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-      let okAction = UIAlertAction(title: "Ok", style: .default) { _ in
-         completion()
-      }
-      
-      alertController.addAction(okAction)
-      present(alertController, animated: true)
-   }
-}
+
 
 //MARK: - SwiftUI Preview
 import SwiftUI

@@ -91,13 +91,14 @@ class PeopleViewController: UIViewController {
    }
    
    private func setupCollectionView() {
-      collectionView  = UICollectionView(frame: view.bounds, collectionViewLayout: createCompositionalLayout())
+      collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createCompositionalLayout())
       collectionView.register(UserCell.self, forCellWithReuseIdentifier: UserCell.reuseId)
-      
       collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.reuseId)
       
       collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
       collectionView.backgroundColor = .systemBackground
+      
+      collectionView.delegate = self
       
       view.addSubview(collectionView)
       
@@ -220,26 +221,11 @@ extension PeopleViewController: UISearchBarDelegate {
    }
 }
 
-
-//MARK: - SwiftUI Preview
-import SwiftUI
-
-struct PeopleViewControllerProvider: PreviewProvider {
-   
-   static var previews: some View {
-      ContainerView()
-         .edgesIgnoringSafeArea(.all)
-   }
-   
-   struct ContainerView: UIViewControllerRepresentable {
-      let viewController = MainTabBarController()
-      
-      func makeUIViewController(context: Context) -> some MainTabBarController {
-         return viewController
-      }
-      
-      func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-         
-      }
+//MARK: - CollectionViewDelegate
+extension PeopleViewController: UICollectionViewDelegate {
+   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+      guard let user = self.dataSource.itemIdentifier(for: indexPath) else { return }
+      let profileVC = ProfileViewController(user: user)
+      self.present(profileVC, animated: true)
    }
 }
