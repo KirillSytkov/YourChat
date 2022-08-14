@@ -7,8 +7,9 @@
 
 import UIKit
 import MessageKit
-
+import InputBarAccessoryView
 class ChatsViewController: MessagesViewController {
+
    //MARK: - Properties
    private let user: MUser
    private let chat: MChat
@@ -31,13 +32,24 @@ class ChatsViewController: MessagesViewController {
       setup()
       configureMessageTextField()
       configureSendButton()
+      
    }
    
    
    //MARK: - Flow func
    private func setup() {
       self.title = chat.friendUsername
+      messagesCollectionView.backgroundColor = .systemGray6
       
+      messageInputBar.delegate = self
+      messagesCollectionView.messagesDataSource = self
+      messagesCollectionView.messagesLayoutDelegate = self
+      messagesCollectionView.messagesDisplayDelegate = self
+      
+      if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout {
+        layout.textMessageSizeCalculator.outgoingAvatarSize = .zero
+        layout.textMessageSizeCalculator.incomingAvatarSize = .zero
+      }
    }
    
    private func configureMessageTextField() {
@@ -70,6 +82,14 @@ class ChatsViewController: MessagesViewController {
        messageInputBar.sendButton.setSize(CGSize(width: 48, height: 48), animated: false)
        messageInputBar.middleContentViewPadding.right = -38
    }
+   
+   private func insertNewMessage(message: MMessage) {
+      guard !messages.contains(message) else { return }
+      messages.append(message)
+      messages.sort()
+      
+      messagesCollectionView.reloadData()
+   }
 }
 
 
@@ -98,5 +118,55 @@ extension ChatsViewController:MessagesDataSource {
       messages.count
    }
    
+   
+}
+
+extension ChatsViewController: MessagesLayoutDelegate {
+   func footerViewSize(for section: Int, in messagesCollectionView: MessagesCollectionView) -> CGSize {
+      return CGSize(width: 0, height: 8)
+   }
+}
+
+extension ChatsViewController: MessagesDisplayDelegate {
+   func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
+      return isFromCurrentSender(message: message) ? .white : .systemPink
+   }
+   
+   func textColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
+      return isFromCurrentSender(message: message) ? .darkGray : .white
+   }
+   
+   func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+      avatarView.isHidden = true
+      
+   }
+   
+   func messageStyle(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageStyle {
+      return .bubble
+   }
+   
+}
+
+extension ChatsViewController:  InputBarAccessoryViewDelegate {
+   
+   func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
+      let message = MMessage(user: user, content: text)
+      insertNewMessage(message: message)
+      inputBar.inputTextView.text = ""
+      
+   }
+   
+//   func inputBar(_ inputBar: InputBarAccessoryView, didChangeIntrinsicContentTo size: CGSize) {
+//      <#code#>
+//   }
+//
+//   func inputBar(_ inputBar: InputBarAccessoryView, textViewTextDidChangeTo text: String) {
+//      <#code#>
+//   }
+//
+//   func inputBar(_ inputBar: InputBarAccessoryView, didSwipeTextViewWith gesture: UISwipeGestureRecognizer) {
+//      <#code#>
+//   }
+//
 }
 
