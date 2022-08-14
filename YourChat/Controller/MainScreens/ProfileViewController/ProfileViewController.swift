@@ -9,6 +9,7 @@ import UIKit
 import SDWebImage
 
 class ProfileViewController: UIViewController {
+   
    //MARK: - Properties
    let containerView = UIView()
    let imageView = UIImageView(image: "human1.jpg", contentMode: .scaleAspectFill)
@@ -38,6 +39,7 @@ class ProfileViewController: UIViewController {
       layout()
    }
    
+   
    //MARK: - Actions
    @objc private func sendMessage(_ sender: UIButton) {
       guard let message = textField.text, !message.isEmpty else { return }
@@ -45,24 +47,17 @@ class ProfileViewController: UIViewController {
       self.dismiss(animated: true) {
          FirestoreService.shared.createWaitingChat(message: message, receiver: self.user) { result in
             switch result {
-               
             case .success():
-               UIApplication.getTopViewController()?.showAlert(with: "Succes", message: "Message for \(self.user.username) has been sent", completion: {
-                  
-               })
+               UIApplication.getTopViewController()?.showAlert(with: "Succes", message: "Message for \(self.user.username) has been sent")
             case .failure(let error):
-               UIApplication.getTopViewController()?.showAlert(with: "Error", message: error.localizedDescription, completion: {
-                  
-               })
+               UIApplication.getTopViewController()?.showAlert(with: "Error", message: error.localizedDescription)
             }
          }
-       
       }
    }
    
    
    //MARK: - Flow func
-   
    private func setup() {
       self.view.backgroundColor = .systemBackground
       
@@ -79,10 +74,10 @@ class ProfileViewController: UIViewController {
       
       textField.translatesAutoresizingMaskIntoConstraints = false
       textField.borderStyle = .roundedRect
+      
       if let button = textField.rightView as? UIButton {
          button.addTarget(self, action: #selector(sendMessage(_:)), for: .touchUpInside)
       }
-      
    }
    
    private func layout() {
@@ -116,9 +111,6 @@ class ProfileViewController: UIViewController {
          textField.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 24),
          textField.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -24),
          textField.heightAnchor.constraint(equalToConstant: 48),
-         
       ])
    }
-   
-   
 }

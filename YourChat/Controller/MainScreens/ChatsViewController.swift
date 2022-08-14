@@ -8,12 +8,15 @@
 import UIKit
 import MessageKit
 import InputBarAccessoryView
-class ChatsViewController: MessagesViewController {
+import FirebaseFirestore
 
+class ChatsViewController: MessagesViewController {
+   
    //MARK: - Properties
    private let user: MUser
    private let chat: MChat
    private var messages:[MMessage] = []
+   private var messageListener: ListenerRegistration?
    
    init(user:MUser, chat: MChat) {
       self.user = user
@@ -25,6 +28,10 @@ class ChatsViewController: MessagesViewController {
       fatalError("init(coder:) has not been implemented")
    }
    
+   deinit {
+      messageListener?.remove()
+   }
+   
    
    //MARK: - Lyficycles
    override func viewDidLoad() {
@@ -32,23 +39,40 @@ class ChatsViewController: MessagesViewController {
       setup()
       configureMessageTextField()
       configureSendButton()
-      
+      configureCameraIcon()
+      addMessageListener()
+   }
+   
+   
+   //MARK: - Actions
+   @objc private func cameraButtonTapped(_ sender: UIButton) {
+      let picker = UIImagePickerController()
+      picker.delegate = self
+      if UIImagePickerController.isSourceTypeAvailable(.camera) {
+         picker.sourceType = .camera
+      } else {
+         picker.sourceType = .photoLibrary
+      }
+      self.present(picker, animated: true)
    }
    
    
    //MARK: - Flow func
    private func setup() {
       self.title = chat.friendUsername
-      messagesCollectionView.backgroundColor = .systemGray6
       
       messageInputBar.delegate = self
+      
+      messagesCollectionView.backgroundColor = .systemGray6
       messagesCollectionView.messagesDataSource = self
       messagesCollectionView.messagesLayoutDelegate = self
       messagesCollectionView.messagesDisplayDelegate = self
       
       if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout {
-        layout.textMessageSizeCalculator.outgoingAvatarSize = .zero
-        layout.textMessageSizeCalculator.incomingAvatarSize = .zero
+         layout.textMessageSizeCalculator.outgoingAvatarSize = .zero
+         layout.textMessageSizeCalculator.incomingAvatarSize = .zero
+         layout.photoMessageSizeCalculator.outgoingAvatarSize = .zero
+         layout.photoMessageSizeCalculator.incomingAvatarSize = .zero
       }
    }
    
@@ -66,21 +90,61 @@ class ChatsViewController: MessagesViewController {
       messageInputBar.inputTextView.layer.masksToBounds = true
       messageInputBar.inputTextView.scrollIndicatorInsets = UIEdgeInsets(top: 14, left: 0, bottom: 14, right: 0)
       
-      
-      messageInputBar.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+      messageInputBar.layer.shadowColor = UIColor.black.cgColor
       messageInputBar.layer.shadowRadius = 5
       messageInputBar.layer.shadowOpacity = 0.3
       messageInputBar.layer.shadowOffset = CGSize(width: 0, height: 4)
-      
    }
    
    private func configureSendButton() {
-       messageInputBar.sendButton.setImage(UIImage(named: "Sent"), for: .normal)
-       messageInputBar.sendButton.applyGradients(cornerRadius: 10)
-       messageInputBar.setRightStackViewWidthConstant(to: 56, animated: false)
-       messageInputBar.sendButton.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 6, right: 30)
-       messageInputBar.sendButton.setSize(CGSize(width: 48, height: 48), animated: false)
-       messageInputBar.middleContentViewPadding.right = -38
+      messageInputBar.sendButton.setImage(UIImage(named: Constants.Images.sent), for: .normal)
+      messageInputBar.sendButton.applyGradients(cornerRadius: 10)
+      messageInputBar.setRightStackViewWidthConstant(to: 56, animated: false)
+      messageInputBar.sendButton.contentEdgeInsets = UIEdgeInsets(top: 2, left: 2, bottom: 6, right: 30)
+      messageInputBar.sendButton.setSize(CGSize(width: 48, height: 48), animated: false)
+      messageInputBar.middleContentViewPadding.right = -38
+   }
+   
+   private func configureCameraIcon() {
+      let cameraItem = InputBarButtonItem(type: .system)
+      cameraItem.tintColor = .systemPink
+      let cameraImage = UIImage(systemName: "camera")
+      cameraItem.image = cameraImage
+      
+      cameraItem.addTarget(self, action: #selector(cameraButtonTapped(_:)), for: .touchUpInside )
+      cameraItem.setSize(CGSize(width: 60, height: 30), animated: false)
+      
+      messageInputBar.leftStackView.alignment = .center
+      messageInputBar.setLeftStackViewWidthConstant(to: 50, animated: false)
+      messageInputBar.setStackViewItems([cameraItem], forStack: .left, animated: false)
+   }
+   
+   private func addMessageListener() {
+      messageListener = ListenerService.shared.messagesObserve(chat: chat, completion: { result in
+         switch result {
+         case .success(var message):
+            if let url = message.downloadURL {
+               StorageService.shared.downloadImage(url: url) { [weak self] result in
+                  guard let self = self else { return }
+                  
+                  switch result {
+                  case .success(let image):
+                     message.image = image
+                     self.insertNewMessage(message: message)
+                  case .failure(let error):
+                     self.showAlert(with: "Error", message: error.localizedDescription) {
+                     }
+                  }
+               }
+            } else {
+               self.insertNewMessage(message: message)
+            }
+         case .failure(let error):
+            self.showAlert(with: "Error", message: error.localizedDescription) {
+               
+            }
+         }
+      })
    }
    
    private func insertNewMessage(message: MMessage) {
@@ -88,17 +152,48 @@ class ChatsViewController: MessagesViewController {
       messages.append(message)
       messages.sort()
       
+      let isLatestMessage = messages.firstIndex(of: message) == messages.count - 1
+      let shouldScrollToBottom = messagesCollectionView.isAtBottom && isLatestMessage
+      
       messagesCollectionView.reloadData()
+      
+      if shouldScrollToBottom {
+         DispatchQueue.main.async {
+            self.messagesCollectionView.scrollToLastItem()
+         }
+      }
+   }
+   
+   private func sendPhoto(image: UIImage) {
+      StorageService.shared.uploadImageMessage(photo: image, to: chat) { result in
+         switch result {
+         case .success(let url):
+            var message = MMessage(user: self.user, image: image)
+            message.downloadURL = url
+            FirestoreService.shared.sendMessage(chat: self.chat, message: message) { result in
+               switch result {
+                  
+               case .success():
+                  self.messagesCollectionView.scrollToLastItem()
+               case .failure(_):
+                  self.showAlert(with: "Error", message: "Image can't be send") {
+                     
+                  }
+               }
+            }
+         case .failure(let error):
+            self.showAlert(with: "Error", message: error.localizedDescription)
+         }
+      }
    }
 }
 
 
 //MARK: - Extensions
-
 //MARK: - MessagesDataSource
 public struct Sender: SenderType {
-    public let senderId: String
-    public let displayName: String
+   public let senderId: String
+   public let displayName: String
 }
 
 extension ChatsViewController:MessagesDataSource {
@@ -118,15 +213,34 @@ extension ChatsViewController:MessagesDataSource {
       messages.count
    }
    
-   
-}
-
-extension ChatsViewController: MessagesLayoutDelegate {
-   func footerViewSize(for section: Int, in messagesCollectionView: MessagesCollectionView) -> CGSize {
-      return CGSize(width: 0, height: 8)
+   func cellTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
+      if indexPath.item % 4 == 0 {
+         return NSAttributedString(string: MessageKitDateFormatter.shared.string(from: message.sentDate), attributes: [
+            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 10),
+            NSAttributedString.Key.foregroundColor: UIColor.darkGray
+         ])
+      } else {
+         return nil
+      }
    }
 }
 
+//MARK: - MessagesLayoutDelegate
+extension ChatsViewController: MessagesLayoutDelegate {
+   func footerViewSize(for section: Int, in messagesCollectionView: MessagesCollectionView) -> CGSize {
+      return CGSize(width: 0, height: 10)
+   }
+   
+   func cellTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
+      if indexPath.item % 4 == 0 {
+         return 30
+      } else {
+         return 0
+      }
+   }
+}
+
+//MARK: - MessagesDisplayDelegate
 extension ChatsViewController: MessagesDisplayDelegate {
    func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
       return isFromCurrentSender(message: message) ? .white : .systemPink
@@ -138,35 +252,35 @@ extension ChatsViewController: MessagesDisplayDelegate {
    
    func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
       avatarView.isHidden = true
-      
    }
    
    func messageStyle(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageStyle {
       return .bubble
    }
-   
 }
 
+//MARK: - InputBarAccessoryViewDelegate
 extension ChatsViewController:  InputBarAccessoryViewDelegate {
-   
    func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
       let message = MMessage(user: user, content: text)
-      insertNewMessage(message: message)
+      FirestoreService.shared.sendMessage(chat: chat, message: message) { result in
+         switch result {
+         case .success(_):
+            self.messagesCollectionView.scrollToLastItem()
+         case .failure(let error):
+            self.showAlert(with: "Error", message: error.localizedDescription)
+         }
+      }
       inputBar.inputTextView.text = ""
-      
    }
-   
-//   func inputBar(_ inputBar: InputBarAccessoryView, didChangeIntrinsicContentTo size: CGSize) {
-//      <#code#>
-//   }
-//
-//   func inputBar(_ inputBar: InputBarAccessoryView, textViewTextDidChangeTo text: String) {
-//      <#code#>
-//   }
-//
-//   func inputBar(_ inputBar: InputBarAccessoryView, didSwipeTextViewWith gesture: UISwipeGestureRecognizer) {
-//      <#code#>
-//   }
-//
 }
 
+//MARK: - UINavigationCOntrollerDelegate, UIImagePickerControllerDelegate
+extension ChatsViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+      picker.dismiss(animated: true)
+      guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
+      
+      sendPhoto(image:image)
+   }
+}

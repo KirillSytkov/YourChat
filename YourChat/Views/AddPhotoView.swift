@@ -9,10 +9,11 @@ import UIKit
 
 class AddPhotoView: UIView {
    
+   //MARK: - Properites
    var circleImageView: UIImageView = {
       let image = UIImageView()
       image.translatesAutoresizingMaskIntoConstraints = false
-      image.image = UIImage(named: "avatar.png")
+      image.image = UIImage(named: Constants.Images.avatarImage)
       image.contentMode = .scaleAspectFill
       image.clipsToBounds = true
       image.layer.borderColor = UIColor.black.cgColor
@@ -23,7 +24,7 @@ class AddPhotoView: UIView {
    let plusButton: UIButton = {
       let button = UIButton(type: .system)
       button.translatesAutoresizingMaskIntoConstraints = false
-      let image = UIImage(named: "plus.png")
+      let image = UIImage(named: Constants.Images.plus)
       button.setImage(image, for: .normal)
       button.tintColor = .systemPink
       return button
@@ -31,7 +32,6 @@ class AddPhotoView: UIView {
    
    override init(frame: CGRect) {
       super.init(frame: frame)
-      
       style()
       layout()
    }
@@ -39,7 +39,7 @@ class AddPhotoView: UIView {
    required init?(coder: NSCoder) {
       fatalError("init(coder:) has not been implemented")
    }
-
+   
    override func layoutSubviews() {
       super.layoutSubviews()
       circleImageView.layer.masksToBounds = true
@@ -50,6 +50,7 @@ class AddPhotoView: UIView {
    }
 }
 
+//MARK: - Flow func
 extension AddPhotoView {
    func style() {
       translatesAutoresizingMaskIntoConstraints = false
@@ -72,7 +73,7 @@ extension AddPhotoView {
          plusButton.bottomAnchor.constraint(equalTo: circleImageView.bottomAnchor, constant: 5),
          
          bottomAnchor.constraint(equalTo: plusButton.bottomAnchor),
-             
+         
       ])
    }
 }

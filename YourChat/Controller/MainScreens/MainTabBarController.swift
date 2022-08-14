@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 
 class MainTabBarController: UITabBarController {
-   //MARK: - Properties
    
+   //MARK: - Properties
    private let peopleImage = UIImage(systemName: "person.3")
    private let convImage = UIImage(systemName: "bubble.left.and.bubble.right")
    private let currentUser: MUser
@@ -24,17 +24,16 @@ class MainTabBarController: UITabBarController {
       fatalError("init(coder:) has not been implemented")
    }
    
+   
    //MARK: - Lyfecycles
    override func viewDidLoad() {
       super.viewDidLoad()
-      
       setupViews()
       setupTabBar()
-      
    }
    
+   //MARK: - flow func
    private func setupViews() {
-      
       let listVC = ListViewController(currentUser: currentUser)
       let peopleVC = PeopleViewController(currentUser: currentUser)
       
@@ -45,7 +44,6 @@ class MainTabBarController: UITabBarController {
    
    private func setupTabBar() {
       tabBar.tintColor = .systemPurple
-      
    }
    
    private func generateNavigationController(rootVC: UIViewController, title: String, image: UIImage) -> UIViewController {

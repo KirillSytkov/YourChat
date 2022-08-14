@@ -11,7 +11,9 @@ import SDWebImage
 
 class WaitingChatCell: UICollectionViewCell {
    
+   //MARK: - Properties
    private let friendImageView = UIImageView()
+   static var reuseId: String  = "waitingCell"
    
    override init(frame: CGRect) {
       super.init(frame: frame)
@@ -24,16 +26,12 @@ class WaitingChatCell: UICollectionViewCell {
    }
 }
  
+//MARK: - Flow func
 extension WaitingChatCell: SelfConfigureCell {
-   
    func configure<U>(with value: U) where U : Hashable {
       guard let chat = value as? MChat else { return }
-//      friendImageView.image = UIImage(named: value.friendAvatarStringURL)
       friendImageView.sd_setImage(with: URL(string: chat.friendAvatarStringURL))
    }
-   
-   static var reuseId: String  = "waitingCell"
-   
 }
 
 extension WaitingChatCell {
@@ -54,6 +52,4 @@ extension WaitingChatCell {
          
       ])
    }
-   
-   
 }

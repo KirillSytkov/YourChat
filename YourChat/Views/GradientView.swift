@@ -7,10 +7,6 @@
 
 import UIKit
 
-
-
-import UIKit
-
 class GradientView: UIView {
    //MARK: - Properties
    private let gradientLayer = CAGradientLayer()

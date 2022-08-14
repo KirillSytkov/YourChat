@@ -10,7 +10,6 @@ import UIKit
 extension UIImageView {
    convenience init(image:	String, contentMode: UIView.ContentMode) {
       self.init()
-      
       self.translatesAutoresizingMaskIntoConstraints = false
       self.image = UIImage(named: image)
       self.contentMode = contentMode

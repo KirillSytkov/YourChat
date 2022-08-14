@@ -43,22 +43,19 @@ class AuthViewController: UIViewController {
    
    //MARK: - Actions
    @objc private func emailButtonTapped(_ sender: UIButton) {
-      present(signUpVC, animated: true)
+      self.present(signUpVC, animated: true)
    }
    
    @objc private func loginButtonTapped(_ sender: UIButton) {
-      present(loginVC, animated: true)
+      self.present(loginVC, animated: true)
    }
    
    @objc private func googleButtonTapped(_ sender: UIButton) {
-      
       AuthService.shared.googleLogin(view: self) { result in
          switch result {
-            
          case .success(let user):
             FirestoreService.shared.getUserData(user: user) { result in
                switch result {
-                  
                case .success(let muser):
                   let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
                   window?.rootViewController = AuthViewController()
@@ -67,6 +64,7 @@ class AuthViewController: UIViewController {
                      let mainTabBar = MainTabBarController(currentUser: muser)
                      self.present(mainTabBar, animated: true)
                   }
+                  
                case .failure(_):
                   self.showAlert(with: "Succes", message: "You are register") {
                      self.present(SetupProfileViewController(currentUser: user), animated: true)
@@ -75,9 +73,7 @@ class AuthViewController: UIViewController {
             }
             
          case .failure(let error):
-            self.showAlert(with: "Error", message: error.localizedDescription) {
-               
-            }
+            self.showAlert(with: "Error", message: error.localizedDescription)
          }
       }
    }
@@ -146,28 +142,4 @@ extension AuthViewController: AuthNaigationDelegate {
       present(signUpVC, animated: true)
    }
      
-}
-
-//MARK: - SwiftUI Preview
-import SwiftUI
-
-struct AuthViewControllerProvider: PreviewProvider {
-   
-   static var previews: some View {
-      ContainerView()
-         .edgesIgnoringSafeArea(.all)
-         
-   }
-   
-   struct ContainerView: UIViewControllerRepresentable {
-      let viewController = AuthViewController()
-      
-      func makeUIViewController(context: Context) -> some AuthViewController {
-         return viewController
-      }
-      
-      func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-         
-      }
-   }
 }

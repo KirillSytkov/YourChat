@@ -15,6 +15,7 @@ class AuthService {
    static let shared = AuthService()
    private let auth = Auth.auth()
    
+   //MARK: - funcs
    func register(email: String? , password: String?, confirmPassword: String?, completion: @escaping (Result<User,Error>) -> Void) {
       guard Validators.isFilled(email: email, password: password, confirmPassword: confirmPassword)  else {
          completion(.failure(AuthError.notFilled))
@@ -52,12 +53,8 @@ class AuthService {
             return
          }
          
-         guard
-            let authentication = user?.authentication,
-            let idToken = authentication.idToken
-         else {
-            return
-         }
+         guard let authentication = user?.authentication,
+               let idToken = authentication.idToken else { return }
          
          let credential = GoogleAuthProvider.credential(withIDToken: idToken,
                                                         accessToken: authentication.accessToken)
@@ -69,7 +66,6 @@ class AuthService {
             }
             completion(.success(result.user))
          }
-         
       }
    }
    

@@ -13,17 +13,19 @@ import FirebaseAuth
 class ListenerService {
    static let shared = ListenerService()
    
+   //MARK: - Properties
    private let db = Firestore.firestore()
    private var userRef: CollectionReference {
-      return db.collection("users")
+      return db.collection(Constants.DataBaseFolders.users)
    }
    
    private var currentUserId: String {
       return Auth.auth().currentUser!.uid
    }
    
+   
+   //MARK: - Funcs
    func usersObserve(users: [MUser], completion: @escaping (Result<[MUser], Error>) -> Void) -> ListenerRegistration? {
-      
       var users = users
       let usersListener = userRef.addSnapshotListener { querySnapshot, error in
          
@@ -51,66 +53,89 @@ class ListenerService {
          }
          completion(.success(users))
       }
-      return usersListener      
+      return usersListener
    }
    
    func waitingChatsObserve(chats: [MChat], completion: @escaping (Result<[MChat], Error>) -> Void) -> ListenerRegistration? {
-       var chats = chats
-       let chatsRef = db.collection(["users", currentUserId, "waitingChats"].joined(separator: "/"))
-       let chatsListener = chatsRef.addSnapshotListener { (querySnapshot, error) in
-           guard let snapshot = querySnapshot else {
-               completion(.failure(error!))
-               return
-           }
-           
-           snapshot.documentChanges.forEach { (diff) in
-               guard let chat = MChat(document: diff.document) else { return }
-               switch diff.type {
-               case .added:
-                   guard !chats.contains(chat) else { return }
-                   chats.append(chat)
-               case .modified:
-                   guard let index = chats.firstIndex(of: chat) else { return }
-                   chats[index] = chat
-               case .removed:
-                   guard let index = chats.firstIndex(of: chat) else { return }
-                   chats.remove(at: index)
-               }
-           }
-           
-           completion(.success(chats))
-       }
-       
-       return chatsListener
+      var chats = chats
+      let chatsRef = db.collection([Constants.DataBaseFolders.users, currentUserId, Constants.DataBaseFolders.waitingChats].joined(separator: "/"))
+      let chatsListener = chatsRef.addSnapshotListener { (querySnapshot, error) in
+         guard let snapshot = querySnapshot else {
+            completion(.failure(error!))
+            return
+         }
+         
+         snapshot.documentChanges.forEach { (diff) in
+            guard let chat = MChat(document: diff.document) else { return }
+            switch diff.type {
+            case .added:
+               guard !chats.contains(chat) else { return }
+               chats.append(chat)
+            case .modified:
+               guard let index = chats.firstIndex(of: chat) else { return }
+               chats[index] = chat
+            case .removed:
+               guard let index = chats.firstIndex(of: chat) else { return }
+               chats.remove(at: index)
+            }
+         }
+         completion(.success(chats))
+      }
+      return chatsListener
    }
    
    func activeChatsObserve(chats: [MChat], completion: @escaping (Result<[MChat], Error>) -> Void) -> ListenerRegistration? {
-       var chats = chats
-       let chatsRef = db.collection(["users", currentUserId, "activeChats"].joined(separator: "/"))
-       let chatsListener = chatsRef.addSnapshotListener { (querySnapshot, error) in
-           guard let snapshot = querySnapshot else {
-               completion(.failure(error!))
-               return
-           }
-           
-           snapshot.documentChanges.forEach { (diff) in
-               guard let chat = MChat(document: diff.document) else { return }
-               switch diff.type {
-               case .added:
-                   guard !chats.contains(chat) else { return }
-                   chats.append(chat)
-               case .modified:
-                   guard let index = chats.firstIndex(of: chat) else { return }
-                   chats[index] = chat
-               case .removed:
-                   guard let index = chats.firstIndex(of: chat) else { return }
-                   chats.remove(at: index)
-               }
-           }
-           
-           completion(.success(chats))
-       }
-       
-       return chatsListener
+      var chats = chats
+      let chatsRef = db.collection([Constants.DataBaseFolders.users, currentUserId, Constants.DataBaseFolders.activeChats].joined(separator: "/"))
+      let chatsListener = chatsRef.addSnapshotListener { (querySnapshot, error) in
+         guard let snapshot = querySnapshot else {
+            completion(.failure(error!))
+            return
+         }
+         
+         snapshot.documentChanges.forEach { (diff) in
+            guard let chat = MChat(document: diff.document) else { return }
+            switch diff.type {
+            case .added:
+               guard !chats.contains(chat) else { return }
+               chats.append(chat)
+            case .modified:
+               guard let index = chats.firstIndex(of: chat) else { return }
+               chats[index] = chat
+            case .removed:
+               guard let index = chats.firstIndex(of: chat) else { return }
+               chats.remove(at: index)
+            }
+         }
+         completion(.success(chats))
+      }
+      return chatsListener
+   }
+   
+   func messagesObserve(chat: MChat, completion: @escaping(Result<MMessage,Error>)->Void) -> ListenerRegistration? {
+      let ref = userRef.document(currentUserId)
+         .collection(Constants.DataBaseFolders.activeChats)
+         .document(chat.friendId)
+         .collection(Constants.DataBaseFolders.messages)
+      let messagesListener = ref.addSnapshotListener { querySnapshot, error in
+         guard let snapshot = querySnapshot else  {
+            completion(.failure(error!))
+            return
+         }
+         
+         snapshot.documentChanges.forEach { diff in
+            guard let message = MMessage(document: diff.document) else { return }
+            
+            switch diff.type {
+            case .added:
+               completion(.success(message))
+            case .modified:
+               break
+            case .removed:
+               break
+            }
+         }
+      }
+      return messagesListener
    }
 }

@@ -30,7 +30,6 @@
 		496E918A2891712700AB420D /* ActiveChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496E91892891712700AB420D /* ActiveChatCell.swift */; };
 		496E918C2891713200AB420D /* WaitingChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496E918B2891713200AB420D /* WaitingChatCell.swift */; };
 		497420812892E3C500DCEDBB /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497420802892E3C500DCEDBB /* SectionHeader.swift */; };
-		497420832892EE2900DCEDBB /* users.json in Resources */ = {isa = PBXBuildFile; fileRef = 497420822892EE2900DCEDBB /* users.json */; };
 		497420862892F04100DCEDBB /* MChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497420852892F04100DCEDBB /* MChat.swift */; };
 		497420882892F05100DCEDBB /* MUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497420872892F05100DCEDBB /* MUser.swift */; };
 		4974208E2892F6D800DCEDBB /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4974208D2892F6D800DCEDBB /* UserCell.swift */; };
@@ -39,13 +38,11 @@
 		49915304288F0D3F00D7E86D /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49915303288F0D3F00D7E86D /* SignUpViewController.swift */; };
 		49915306288F108400D7E86D /* OneLineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49915305288F108400D7E86D /* OneLineTextField.swift */; };
 		499ABC77289AC0CC00EFEE2F /* UserError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499ABC76289AC0CC00EFEE2F /* UserError.swift */; };
-		499ADB872891518100F6E0E9 /* activeChats.json in Resources */ = {isa = PBXBuildFile; fileRef = 499ADB852891518100F6E0E9 /* activeChats.json */; };
-		499ADB882891518100F6E0E9 /* waitingChats.json in Resources */ = {isa = PBXBuildFile; fileRef = 499ADB862891518100F6E0E9 /* waitingChats.json */; };
 		499ADB8A289151A700F6E0E9 /* Bundle + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499ADB89289151A700F6E0E9 /* Bundle + extension.swift */; };
 		49B16E4628982433008E6EF8 /* ChatRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B16E4528982433008E6EF8 /* ChatRequestViewController.swift */; };
 		49B16E4928982B87008E6EF8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49B16E4828982B87008E6EF8 /* GoogleService-Info.plist */; };
 		49B87E8728928EB70069E9C7 /* SelfConfigureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B87E8628928EB70069E9C7 /* SelfConfigureCell.swift */; };
-		49C7E86628A2E04B00D16508 /* UIAplication + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C7E86528A2E04B00D16508 /* UIAplication + Extension.swift */; };
+		49C4B64028A9416100D97597 /* UIScrollView + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C4B63F28A9416000D97597 /* UIScrollView + extension.swift */; };
 		49DF637628982EFE00E3CCFE /* Validators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DF637528982EFE00E3CCFE /* Validators.swift */; };
 		49DF63782898307600E3CCFE /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DF63772898307600E3CCFE /* AuthService.swift */; };
 		49EB541C2892868500F94B3B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EB541B2892868500F94B3B /* GradientView.swift */; };
@@ -88,7 +85,6 @@
 		496E91892891712700AB420D /* ActiveChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveChatCell.swift; sourceTree = "<group>"; };
 		496E918B2891713200AB420D /* WaitingChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingChatCell.swift; sourceTree = "<group>"; };
 		497420802892E3C500DCEDBB /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
-		497420822892EE2900DCEDBB /* users.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = users.json; sourceTree = "<group>"; };
 		497420852892F04100DCEDBB /* MChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MChat.swift; sourceTree = "<group>"; };
 		497420872892F05100DCEDBB /* MUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MUser.swift; sourceTree = "<group>"; };
 		4974208D2892F6D800DCEDBB /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
@@ -97,13 +93,11 @@
 		49915303288F0D3F00D7E86D /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		49915305288F108400D7E86D /* OneLineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneLineTextField.swift; sourceTree = "<group>"; };
 		499ABC76289AC0CC00EFEE2F /* UserError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserError.swift; sourceTree = "<group>"; };
-		499ADB852891518100F6E0E9 /* activeChats.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = activeChats.json; sourceTree = "<group>"; };
-		499ADB862891518100F6E0E9 /* waitingChats.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = waitingChats.json; sourceTree = "<group>"; };
 		499ADB89289151A700F6E0E9 /* Bundle + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle + extension.swift"; sourceTree = "<group>"; };
 		49B16E4528982433008E6EF8 /* ChatRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRequestViewController.swift; sourceTree = "<group>"; };
 		49B16E4828982B87008E6EF8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		49B87E8628928EB70069E9C7 /* SelfConfigureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfConfigureCell.swift; sourceTree = "<group>"; };
-		49C7E86528A2E04B00D16508 /* UIAplication + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAplication + Extension.swift"; sourceTree = "<group>"; };
+		49C4B63F28A9416000D97597 /* UIScrollView + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView + extension.swift"; sourceTree = "<group>"; };
 		49DF637528982EFE00E3CCFE /* Validators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validators.swift; sourceTree = "<group>"; };
 		49DF63772898307600E3CCFE /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		49EB541B2892868500F94B3B /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
@@ -138,7 +132,6 @@
 			isa = PBXGroup;
 			children = (
 				4906E51E288FDAB500846E7E /* LoginViewController.swift */,
-				49C7E86528A2E04B00D16508 /* UIAplication + Extension.swift */,
 			);
 			path = LoginViewController;
 			sourceTree = "<group>";
@@ -205,7 +198,6 @@
 				49B87E8828928F040069E9C7 /* Protocols */,
 				49079852288EAAB50077245A /* Controller */,
 				4907984E288EAAA40077245A /* Views */,
-				49079851288EAAB30077245A /* Data */,
 				49079853288EAABF0077245A /* Resources */,
 				49079848288EA9490077245A /* Info.plist */,
 				49B16E4828982B87008E6EF8 /* GoogleService-Info.plist */,
@@ -231,6 +223,7 @@
 				499ADB89289151A700F6E0E9 /* Bundle + extension.swift */,
 				494669A828A7D2E500953669 /* UIApplication + extension.swift */,
 				49FAF64B28A561BD00D806B9 /* UIImage + extension.swift */,
+				49C4B63F28A9416000D97597 /* UIScrollView + extension.swift */,
 				49F45FCA288ECC63008DC461 /* UIButton + extension.swift */,
 				4906E5252890079000846E7E /* UISegmentedControl + extension.swift */,
 				49F45FDC288EDDD5008DC461 /* UIStackView + extension.swift */,
@@ -251,16 +244,6 @@
 				497420872892F05100DCEDBB /* MUser.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		49079851288EAAB30077245A /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				497420822892EE2900DCEDBB /* users.json */,
-				499ADB852891518100F6E0E9 /* activeChats.json */,
-				499ADB862891518100F6E0E9 /* waitingChats.json */,
-			);
-			path = Data;
 			sourceTree = "<group>";
 		};
 		49079852288EAAB50077245A /* Controller */ = {
@@ -465,11 +448,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				497420832892EE2900DCEDBB /* users.json in Resources */,
 				49079847288EA9490077245A /* LaunchScreen.storyboard in Resources */,
-				499ADB872891518100F6E0E9 /* activeChats.json in Resources */,
 				49079844288EA9490077245A /* Assets.xcassets in Resources */,
-				499ADB882891518100F6E0E9 /* waitingChats.json in Resources */,
 				49B16E4928982B87008E6EF8 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -550,7 +530,6 @@
 				4906E524288FE2E200846E7E /* AddPhotoView.swift in Sources */,
 				497420862892F04100DCEDBB /* MChat.swift in Sources */,
 				49FAF64C28A561BD00D806B9 /* UIImage + extension.swift in Sources */,
-				49C7E86628A2E04B00D16508 /* UIAplication + Extension.swift in Sources */,
 				4911953728A920E10084C389 /* ChatsViewController.swift in Sources */,
 				49F45FD9288ED1C1008DC461 /* UIImageView + extension.swift in Sources */,
 				499ADB8A289151A700F6E0E9 /* Bundle + extension.swift in Sources */,
@@ -563,6 +542,7 @@
 				49915306288F108400D7E86D /* OneLineTextField.swift in Sources */,
 				49F45FDD288EDDD5008DC461 /* UIStackView + extension.swift in Sources */,
 				4907983B288EA9470077245A /* AppDelegate.swift in Sources */,
+				49C4B64028A9416100D97597 /* UIScrollView + extension.swift in Sources */,
 				494669AB28A7D6A000953669 /* MMessage.swift in Sources */,
 				49DF63782898307600E3CCFE /* AuthService.swift in Sources */,
 				4906E51F288FDAB500846E7E /* LoginViewController.swift in Sources */,

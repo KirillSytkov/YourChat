@@ -10,9 +10,12 @@ import SDWebImage
 
 class UserCell: UICollectionViewCell  {
    
+   //MARK: - Properties
    let userImageView = UIImageView()
    let userName = UILabel(text: "Name", font: .laoSangamMN20())
    let containerView = UIView()
+   
+   static var reuseId: String = "UserCell"
    
    override init(frame: CGRect) {
       super.init(frame: frame)
@@ -35,6 +38,7 @@ class UserCell: UICollectionViewCell  {
    }
 }
 
+//MARK: - Flow funcs
 extension UserCell: SelfConfigureCell {
    func configure<U>(with value: U) where U : Hashable {
       guard let user = value as? MUser else { return }
@@ -43,11 +47,6 @@ extension UserCell: SelfConfigureCell {
       guard let url = URL(string: user.avatarStringURL) else { return }
       userImageView.sd_setImage(with: url )
    }
-   
-   static var reuseId: String {
-      "UserCell"
-   }
-   
 }
 
 extension UserCell {
@@ -77,7 +76,6 @@ extension UserCell {
          containerView.trailingAnchor.constraint(equalTo: trailingAnchor),
          containerView.bottomAnchor.constraint(equalTo: bottomAnchor),
          
-         
          userImageView.topAnchor.constraint(equalTo: containerView.topAnchor),
          userImageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
          userImageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
@@ -89,5 +87,4 @@ extension UserCell {
          userName.topAnchor.constraint(equalTo: userImageView.bottomAnchor),
       ])
    }
-   
 }

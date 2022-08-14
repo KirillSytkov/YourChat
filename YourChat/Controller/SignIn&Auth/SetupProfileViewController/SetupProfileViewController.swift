@@ -10,6 +10,7 @@ import FirebaseAuth
 import SDWebImage
 
 class SetupProfileViewController: UIViewController {
+   
    //MARK: - Properties
    private let welcomeLabel = UILabel(text: "Set up profile", font: .avenir26())
    
@@ -45,6 +46,7 @@ class SetupProfileViewController: UIViewController {
       fatalError("init(coder:) has not been implemented")
    }
    
+   
    //MARK: - Lyficycles
    override func viewDidLoad() {
       super.viewDidLoad()
@@ -52,13 +54,13 @@ class SetupProfileViewController: UIViewController {
       layout()
    }
    
+   
    //MARK: - Actions
    @objc private func signUpButtonTapped(_ sender: UIButton) {
       
       FirestoreService.shared.saveProfileWith(id: currentUser.uid, email: currentUser.email!, username: fullNameTextField.text, avatarImage: fullImageView.circleImageView.image, description: aboutTextField.text, sex: sexSegmentedControl.titleForSegment(at: sexSegmentedControl.selectedSegmentIndex)) { result in
          
          switch result{
-            
          case .success(let user):
             self.showAlert(with: "Succes!", message: "Profile saved!") {
                let mainTabBar = MainTabBarController(currentUser: user)
@@ -66,9 +68,7 @@ class SetupProfileViewController: UIViewController {
                self.present(mainTabBar, animated: true)
             }
          case .failure(let error):
-            self.showAlert(with: "Error", message: error.localizedDescription) {
-               
-            }
+            self.showAlert(with: "Error", message: error.localizedDescription)
          }
       }
    }
@@ -78,8 +78,8 @@ class SetupProfileViewController: UIViewController {
       imagePickerController.delegate = self
       imagePickerController.sourceType = .photoLibrary
       present(imagePickerController, animated: true)
-      
    }
+   
    
    //MARK: - Flow funcs
    private func setup() {
@@ -124,36 +124,13 @@ class SetupProfileViewController: UIViewController {
    
 }
 
+
 //MARK: - Extensions
 extension SetupProfileViewController:UINavigationControllerDelegate, UIImagePickerControllerDelegate {
    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
       picker.dismiss(animated: true)
       guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
       fullImageView.circleImageView.image = image
-      
-   }
-}
-
-//MARK: - SwiftUI Preview
-import SwiftUI
-
-struct SetupProfileControllerProvider: PreviewProvider {
-   
-   static var previews: some View {
-      ContainerView()
-         .edgesIgnoringSafeArea(.all)
-   }
-   
-   struct ContainerView: UIViewControllerRepresentable {
-      let viewController = SetupProfileViewController(currentUser: Auth.auth().currentUser!)
-      
-      func makeUIViewController(context: Context) -> some SetupProfileViewController {
-         return viewController
-      }
-      
-      func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-         
-      }
    }
 }
 

@@ -10,6 +10,7 @@ import FirebaseAuth
 import FirebaseFirestore
 
 class PeopleViewController: UIViewController {
+   
    //MARK: - Properties
    private let searchController = UISearchController(searchResultsController: nil)
    private var users = [MUser]()
@@ -64,15 +65,12 @@ class PeopleViewController: UIViewController {
             try Auth.auth().signOut()
             let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
             window?.rootViewController = AuthViewController()
-            
          } catch {
             debugPrint(error.localizedDescription)
          }
-            
       }))
-      present(ac, animated: true, completion: nil)
+      self.present(ac, animated: true, completion: nil)
    }
-   
    
    
    //MARK: - Flow func
@@ -101,7 +99,6 @@ class PeopleViewController: UIViewController {
       collectionView.delegate = self
       
       view.addSubview(collectionView)
-      
    }
     
    private func addUsersListener() {
@@ -111,9 +108,7 @@ class PeopleViewController: UIViewController {
             self.users = users
             self.reloadData(with: nil)
          case .failure(let error):
-            self.showAlert(with: "Error", message: error.localizedDescription) {
-               
-            }
+            self.showAlert(with: "Error", message: error.localizedDescription)
          }
       })
    }
@@ -212,7 +207,6 @@ extension PeopleViewController {
       dataSource?.apply(snapshot, animatingDifferences: true)
    }
 }
-
 
 //MARK: - SearchBar delegate
 extension PeopleViewController: UISearchBarDelegate {

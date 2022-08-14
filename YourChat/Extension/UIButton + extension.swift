@@ -9,6 +9,7 @@
 import UIKit
 
 extension UIButton {
+   
    convenience init(title: String,
                     titleColor: UIColor,
                     backgroundColor: UIColor,
@@ -16,7 +17,6 @@ extension UIButton {
                     isShadow:Bool = false,
                     cornerRadius: CGFloat = 5){
       self.init(type:.system)
-      
       self.setTitle(title, for: .normal)
       self.setTitleColor(titleColor, for: .normal)
       self.backgroundColor = backgroundColor
@@ -41,7 +41,6 @@ extension UIButton {
          googleLogo.widthAnchor.constraint(equalTo: googleLogo.heightAnchor),
          
       ])
-          
    }
    
 }

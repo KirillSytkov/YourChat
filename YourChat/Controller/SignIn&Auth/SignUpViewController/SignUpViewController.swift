@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 class SignUpViewController: UIViewController {
+   
    //MARK: - Properties
    private let welcomeLabel = UILabel(text: "Good to see you!", font: .avenir26())
    
@@ -27,6 +28,8 @@ class SignUpViewController: UIViewController {
    private let loginButton = UIButton()
    
    weak var delegate: AuthNaigationDelegate?
+   
+   
    //MARK: - Lyficycles
    override func viewDidLoad() {
       super.viewDidLoad()
@@ -34,19 +37,17 @@ class SignUpViewController: UIViewController {
       layout()
    }
    
+   
    //MARK: - Actions
    @objc private func signupButtonTapepd(_ sender: UIButton) {
       AuthService.shared.register(email: emailTextFiled.text, password: passwordTextField.text, confirmPassword: confirmTextField.text) { result in
          switch result {
-            
          case .success(let user):
             self.showAlert(with: "Succes", message: "You are registered") {
                self.present(SetupProfileViewController(currentUser: user), animated: true)
             }
          case .failure(let error):
-            self.showAlert(with: "Error", message: error.localizedDescription) {
-               
-            }
+            self.showAlert(with: "Error", message: error.localizedDescription)
          }
       }
    }
@@ -105,34 +106,6 @@ class SignUpViewController: UIViewController {
          bottomStackView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 50),
          bottomStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
       ])
-      
    }
    
-}
-//MARK: - Extensions
-
-
-//MARK: - SwiftUI Preview
-import SwiftUI
-
-struct SignUpViewControllerProvider: PreviewProvider {
-   
-   static var previews: some View {
-      ContainerView()
-         .previewDevice("iPhone 13")
-         .edgesIgnoringSafeArea(.all)
-         
-   }
-   
-   struct ContainerView: UIViewControllerRepresentable {
-      let viewController = SignUpViewController()
-      
-      func makeUIViewController(context: Context) -> some SignUpViewController {
-         return viewController
-      }
-      
-      func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-         
-      }
-   }
 }

@@ -9,9 +9,12 @@ import UIKit
 
 class ActiveChatCell: UICollectionViewCell {
    
+   //MARK: - Properties
+   static var reuseId: String = "ActiveChatCell"
+   
    private let friendImageView = UIImageView()
-   private let friendName = UILabel(text: "User name", font: .laoSangamMN20())
-   private let lastMessage = UILabel(text: "How are you?",font: .laoSangamMN18())
+   private let friendName = UILabel()
+   private let lastMessage = UILabel()
    private let gradientView = GradientView(from: .topTrailing, to: .bottomLeading, startColor: .systemPurple, endColor: .systemTeal)
    
    override init(frame: CGRect) {
@@ -26,16 +29,15 @@ class ActiveChatCell: UICollectionViewCell {
    
 }
 
+//MARK: - Flow func
 extension ActiveChatCell: SelfConfigureCell {
+   
    func configure<U>(with value: U) where U : Hashable {
       guard let chat = value as? MChat else { return }
       friendImageView.sd_setImage(with: URL(string: chat.friendAvatarStringURL))
       friendName.text = chat.friendUsername
       lastMessage.text = chat.lastMessageContent
    }
-   
-   
-   static var reuseId: String = "ActiveChatCell"
    
 }
 
@@ -50,7 +52,8 @@ extension ActiveChatCell {
       friendImageView.backgroundColor = .red
       
       friendName.translatesAutoresizingMaskIntoConstraints = false
-      
+      friendName.font = .laoSangamMN20()
+      lastMessage.font = .laoSangamMN18()
       lastMessage.translatesAutoresizingMaskIntoConstraints = false
       
       gradientView.translatesAutoresizingMaskIntoConstraints = false

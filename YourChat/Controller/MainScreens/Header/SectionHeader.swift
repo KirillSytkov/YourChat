@@ -9,6 +9,7 @@ import UIKit
 
 class SectionHeader: UICollectionReusableView {
    
+   //MARK: - Properties
    static let reuseId = "SectionHeader"
    
    let title = UILabel()
@@ -22,10 +23,10 @@ class SectionHeader: UICollectionReusableView {
    required init?(coder: NSCoder) {
       fatalError("init(coder:) has not been implemented")
    }
-   
-   
 }
 
+
+//MARK: - Setup funcs
 extension SectionHeader {
    
    private func setup() {
@@ -49,5 +50,4 @@ extension SectionHeader {
       title.textColor = textColor
       title.font = font
    }
-   
 }

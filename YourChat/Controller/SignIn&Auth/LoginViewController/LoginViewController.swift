@@ -9,6 +9,7 @@ import UIKit
 import GoogleSignIn
 
 class LoginViewController: UIViewController {
+   
    //MARK: - Properties
    private let welcomeLabel = UILabel(text: "Welcome Back!", font: .avenir26())
    
@@ -38,6 +39,7 @@ class LoginViewController: UIViewController {
       layout()
    }
    
+   
    //MARK: - Actions
    @objc private  func loginButtonTapped(_ sender: UIButton) {
       AuthService.shared.login(email: emailTextFiled.text, password: passwordTextField.text) { result in
@@ -52,16 +54,13 @@ class LoginViewController: UIViewController {
                      let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
                      window?.rootViewController = mainTabBar
                      UIView.transition(with: window!, duration: 0.3, options: .transitionCrossDissolve, animations: nil, completion: nil)
-                  case .failure(let error):
+                  case .failure(_):
                      self.present(SetupProfileViewController(currentUser:user), animated: true)
                   }
                }
             }
-            
          case .failure(let error):
-            self.showAlert(with: "Error", message: error.localizedDescription) {
-               
-            }
+            self.showAlert(with: "Error", message: error.localizedDescription)
          }
       }
    }
@@ -75,11 +74,9 @@ class LoginViewController: UIViewController {
    @objc private func googleButtonTapped(_ sender: UIButton) {
       AuthService.shared.googleLogin(view: self) { result in
          switch result {
-            
          case .success(let user):
             FirestoreService.shared.getUserData(user: user) { result in
                switch result {
-                  
                case .success(let muser):
                   self.showAlert(with: "Succes", message: "You are registred") {
                      let mainTabBar = MainTabBarController(currentUser: muser)
@@ -93,11 +90,8 @@ class LoginViewController: UIViewController {
                   }
                }
             }
-            
          case .failure(let error):
-            self.showAlert(with: "Error", message: error.localizedDescription) {
-               
-            }
+            self.showAlert(with: "Error", message: error.localizedDescription)
          }
       }
    }
@@ -156,32 +150,4 @@ class LoginViewController: UIViewController {
       ])
    }
 }
-
-//MARK: - Extensions
-
-
-//MARK: - SwiftUI Preview
-import SwiftUI
-
-struct LoginViewControllerProvider: PreviewProvider {
-   
-   static var previews: some View {
-      ContainerView()
-         .edgesIgnoringSafeArea(.all)
-         
-   }
-   
-   struct ContainerView: UIViewControllerRepresentable {
-      let viewController = LoginViewController()
-      
-      func makeUIViewController(context: Context) -> some LoginViewController {
-         return viewController
-      }
-      
-      func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-         
-      }
-   }
-}
-
 

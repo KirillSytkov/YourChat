@@ -8,6 +8,7 @@
 import UIKit
 
 class InsertableTextField: UITextField {
+   
    //MARK: - Properties
    let imageView = UIImageView(image: UIImage(systemName: "smiley"))
    let button = UIButton(type: .system)
@@ -15,7 +16,6 @@ class InsertableTextField: UITextField {
    override init(frame: CGRect) {
       super.init(frame: frame)
       setup()
-      
    }
    
    required init?(coder: NSCoder) {
@@ -23,6 +23,7 @@ class InsertableTextField: UITextField {
    }
 }
 
+//MARK: - Flow func
 extension InsertableTextField {
    private func setup() {
       backgroundColor = .white
@@ -38,8 +39,8 @@ extension InsertableTextField {
       leftView?.frame = CGRect(x: 0, y: 0, width: 19, height: 19)
       leftViewMode = .always
       
-      button.setImage(UIImage(named: "Sent"), for: .normal)
-
+      button.setImage(UIImage(named: Constants.Images.sent), for: .normal)
+      
       rightView = button
       rightView?.frame = CGRect(x: 0, y: 0, width: 19, height: 19)
       rightViewMode = .always

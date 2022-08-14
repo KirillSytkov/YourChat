@@ -7,14 +7,13 @@
 
 import UIKit
 
-
-
 class ChatRequestViewController: UIViewController {
+   
    //MARK: - Properties
    let containerView = UIView()
-   let imageView = UIImageView(image: "human1.jpg", contentMode: .scaleAspectFill)
-   let nameLabel = UILabel(text: "Mark Boner", font: .systemFont(ofSize: 20, weight: .regular))
-   let aboutLabel = UILabel(text: "You have the opportunity to start a new chat", font: .systemFont(ofSize: 16, weight: .light))
+   let imageView = UIImageView()
+   let nameLabel = UILabel()
+   let aboutLabel = UILabel()
    let acceptButton = UIButton(title: "Accept".uppercased(), titleColor: .white, backgroundColor: .black, font: .laoSangamMN20(), isShadow: false, cornerRadius: 10)
    let denyButton = UIButton(title: "Deny".uppercased(), titleColor: .systemPink, backgroundColor: .white, font: .laoSangamMN20(), isShadow: false, cornerRadius: 10)
    
@@ -45,6 +44,7 @@ class ChatRequestViewController: UIViewController {
       self.acceptButton.applyGradients(cornerRadius: 10)
    }
    
+   
    //MARK: - Actions
    @objc private func denyButtonTapped(_ sender: UIButton) {
       self.dismiss(animated: true) {
@@ -58,6 +58,7 @@ class ChatRequestViewController: UIViewController {
       }
    }
    
+   
    //MARK: - Flow funcs
    private func setup() {
       self.view.backgroundColor = .systemBackground
@@ -67,11 +68,14 @@ class ChatRequestViewController: UIViewController {
       containerView.layer.cornerRadius = 30
       
       imageView.translatesAutoresizingMaskIntoConstraints = false
+      imageView.contentMode = .scaleAspectFill
       
       nameLabel.translatesAutoresizingMaskIntoConstraints = false
+      nameLabel.font = UIFont.systemFont(ofSize: 20,weight: .regular)
       
       aboutLabel.translatesAutoresizingMaskIntoConstraints = false
       aboutLabel.numberOfLines = 1
+      aboutLabel.font = UIFont.systemFont(ofSize: 16, weight: .light)
       
       acceptButton.translatesAutoresizingMaskIntoConstraints = false
       acceptButton.addTarget(self, action: #selector(acceptButtonTapped(_:)), for: .touchUpInside)
@@ -119,6 +123,5 @@ class ChatRequestViewController: UIViewController {
          buttonsStackView.heightAnchor.constraint(equalToConstant: 48),
       ])
    }
-   
 }
 
