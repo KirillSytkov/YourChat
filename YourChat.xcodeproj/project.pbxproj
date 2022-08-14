@@ -21,6 +21,7 @@
 		4907AB2E2894597B002A54DE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4907AB2D2894597B002A54DE /* ProfileViewController.swift */; };
 		4907AB3028945DB7002A54DE /* InsertableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4907AB2F28945DB7002A54DE /* InsertableTextField.swift */; };
 		490B60F028A81E2F003EF4E8 /* WaitingChatsNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490B60EF28A81E2F003EF4E8 /* WaitingChatsNavigationDelegate.swift */; };
+		4911953728A920E10084C389 /* ChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4911953628A920E10084C389 /* ChatsViewController.swift */; };
 		491FF793289ABCA500CA7391 /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491FF792289ABCA500CA7391 /* FirestoreService.swift */; };
 		494669A928A7D2E500953669 /* UIApplication + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494669A828A7D2E500953669 /* UIApplication + extension.swift */; };
 		494669AB28A7D6A000953669 /* MMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494669AA28A7D6A000953669 /* MMessage.swift */; };
@@ -78,6 +79,7 @@
 		4907AB2D2894597B002A54DE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		4907AB2F28945DB7002A54DE /* InsertableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertableTextField.swift; sourceTree = "<group>"; };
 		490B60EF28A81E2F003EF4E8 /* WaitingChatsNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingChatsNavigationDelegate.swift; sourceTree = "<group>"; };
+		4911953628A920E10084C389 /* ChatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewController.swift; sourceTree = "<group>"; };
 		491FF792289ABCA500CA7391 /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
 		494669A828A7D2E500953669 /* UIApplication + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication + extension.swift"; sourceTree = "<group>"; };
 		494669AA28A7D6A000953669 /* MMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMessage.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				4906E52B2890186300846E7E /* MainTabBarController.swift */,
+				4911953628A920E10084C389 /* ChatsViewController.swift */,
 				4907AB2C28945938002A54DE /* ProfileViewController */,
 				49B16E4728982436008E6EF8 /* ChatRequestViewController */,
 				497420842892EF7000DCEDBB /* Header */,
@@ -548,6 +551,7 @@
 				497420862892F04100DCEDBB /* MChat.swift in Sources */,
 				49FAF64C28A561BD00D806B9 /* UIImage + extension.swift in Sources */,
 				49C7E86628A2E04B00D16508 /* UIAplication + Extension.swift in Sources */,
+				4911953728A920E10084C389 /* ChatsViewController.swift in Sources */,
 				49F45FD9288ED1C1008DC461 /* UIImageView + extension.swift in Sources */,
 				499ADB8A289151A700F6E0E9 /* Bundle + extension.swift in Sources */,
 				49B87E8728928EB70069E9C7 /* SelfConfigureCell.swift in Sources */,
