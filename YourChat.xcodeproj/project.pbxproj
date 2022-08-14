@@ -20,6 +20,7 @@
 		49079847288EA9490077245A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49079845288EA9490077245A /* LaunchScreen.storyboard */; };
 		4907AB2E2894597B002A54DE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4907AB2D2894597B002A54DE /* ProfileViewController.swift */; };
 		4907AB3028945DB7002A54DE /* InsertableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4907AB2F28945DB7002A54DE /* InsertableTextField.swift */; };
+		490B60F028A81E2F003EF4E8 /* WaitingChatsNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490B60EF28A81E2F003EF4E8 /* WaitingChatsNavigationDelegate.swift */; };
 		491FF793289ABCA500CA7391 /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491FF792289ABCA500CA7391 /* FirestoreService.swift */; };
 		494669A928A7D2E500953669 /* UIApplication + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494669A828A7D2E500953669 /* UIApplication + extension.swift */; };
 		494669AB28A7D6A000953669 /* MMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494669AA28A7D6A000953669 /* MMessage.swift */; };
@@ -76,6 +77,7 @@
 		49079848288EA9490077245A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4907AB2D2894597B002A54DE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		4907AB2F28945DB7002A54DE /* InsertableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertableTextField.swift; sourceTree = "<group>"; };
+		490B60EF28A81E2F003EF4E8 /* WaitingChatsNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingChatsNavigationDelegate.swift; sourceTree = "<group>"; };
 		491FF792289ABCA500CA7391 /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
 		494669A828A7D2E500953669 /* UIApplication + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication + extension.swift"; sourceTree = "<group>"; };
 		494669AA28A7D6A000953669 /* MMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMessage.swift; sourceTree = "<group>"; };
@@ -378,6 +380,7 @@
 			children = (
 				49B87E8628928EB70069E9C7 /* SelfConfigureCell.swift */,
 				494F8E33289990FD0099BB11 /* AuthNavigationDelegate.swift */,
+				490B60EF28A81E2F003EF4E8 /* WaitingChatsNavigationDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -560,6 +563,7 @@
 				49DF63782898307600E3CCFE /* AuthService.swift in Sources */,
 				4906E51F288FDAB500846E7E /* LoginViewController.swift in Sources */,
 				49F45FCB288ECC63008DC461 /* UIButton + extension.swift in Sources */,
+				490B60F028A81E2F003EF4E8 /* WaitingChatsNavigationDelegate.swift in Sources */,
 				494F8E312899841A0099BB11 /* AuthError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

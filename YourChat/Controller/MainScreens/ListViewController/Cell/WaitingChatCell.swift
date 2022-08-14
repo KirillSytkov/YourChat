@@ -5,10 +5,11 @@
 //  Created by Kirill Sytkov on 27.07.2022.
 //
 
-import Foundation
-import UIKit
 
-class WaitingVhatCell: UICollectionViewCell {
+import UIKit
+import SDWebImage
+
+class WaitingChatCell: UICollectionViewCell {
    
    private let friendImageView = UIImageView()
    
@@ -23,22 +24,22 @@ class WaitingVhatCell: UICollectionViewCell {
    }
 }
  
-extension WaitingVhatCell: SelfConfigureCell {
+extension WaitingChatCell: SelfConfigureCell {
    
    func configure<U>(with value: U) where U : Hashable {
-      guard let value = value as? MChat else { return }
-      friendImageView.image = UIImage(named: value.friendAvatarStringURL)
+      guard let chat = value as? MChat else { return }
+//      friendImageView.image = UIImage(named: value.friendAvatarStringURL)
+      friendImageView.sd_setImage(with: URL(string: chat.friendAvatarStringURL))
    }
    
    static var reuseId: String  = "waitingCell"
    
 }
 
-extension WaitingVhatCell {
+extension WaitingChatCell {
    private func setup(){
       self.layer.cornerRadius = 5
       self.clipsToBounds = true
-      
       friendImageView.translatesAutoresizingMaskIntoConstraints = false
    }
    

@@ -7,6 +7,8 @@
 
 import UIKit
 
+
+
 class ChatRequestViewController: UIViewController {
    //MARK: - Properties
    let containerView = UIView()
@@ -15,6 +17,21 @@ class ChatRequestViewController: UIViewController {
    let aboutLabel = UILabel(text: "You have the opportunity to start a new chat", font: .systemFont(ofSize: 16, weight: .light))
    let acceptButton = UIButton(title: "Accept".uppercased(), titleColor: .white, backgroundColor: .black, font: .laoSangamMN20(), isShadow: false, cornerRadius: 10)
    let denyButton = UIButton(title: "Deny".uppercased(), titleColor: .systemPink, backgroundColor: .white, font: .laoSangamMN20(), isShadow: false, cornerRadius: 10)
+   
+   private var chat: MChat
+   weak var delegate: WaitingChatsNavigationDelegate?
+   
+   init(chat: MChat) {
+      self.chat = chat
+      nameLabel.text = chat.friendUsername
+      imageView.sd_setImage(with: URL(string: chat.friendAvatarStringURL))
+      super.init(nibName: nil, bundle: nil)
+   }
+   
+   required init?(coder: NSCoder) {
+      fatalError("init(coder:) has not been implemented")
+   }
+   
    
    //MARK: - Lyficycles
    override func viewDidLoad() {
@@ -26,6 +43,19 @@ class ChatRequestViewController: UIViewController {
    override func viewWillLayoutSubviews() {
       super.viewWillLayoutSubviews()
       self.acceptButton.applyGradients(cornerRadius: 10)
+   }
+   
+   //MARK: - Actions
+   @objc private func denyButtonTapped(_ sender: UIButton) {
+      self.dismiss(animated: true) {
+         self.delegate?.removeWaitingChat(chat: self.chat)
+      }
+   }
+   
+   @objc private func acceptButtonTapped(_ sender: UIButton) {
+      self.dismiss(animated: true) {
+         self.delegate?.chatToActive(chat: self.chat)
+      }
    }
    
    //MARK: - Flow funcs
@@ -44,10 +74,12 @@ class ChatRequestViewController: UIViewController {
       aboutLabel.numberOfLines = 1
       
       acceptButton.translatesAutoresizingMaskIntoConstraints = false
+      acceptButton.addTarget(self, action: #selector(acceptButtonTapped(_:)), for: .touchUpInside)
       
       denyButton.translatesAutoresizingMaskIntoConstraints = false
       denyButton.layer.borderWidth = 1.2
       denyButton.layer.borderColor = UIColor.systemPink.cgColor
+      denyButton.addTarget(self, action: #selector(denyButtonTapped(_:)), for: .touchUpInside)
    }
    
    private func layout() {
@@ -90,26 +122,3 @@ class ChatRequestViewController: UIViewController {
    
 }
 
-
-//MARK: - SwiftUI Preview
-import SwiftUI
-
-struct CharRequestViewControllerProvider: PreviewProvider {
-   
-   static var previews: some View {
-      ContainerView()
-         .edgesIgnoringSafeArea(.all)
-   }
-   
-   struct ContainerView: UIViewControllerRepresentable {
-      let viewController = ChatRequestViewController()
-      
-      func makeUIViewController(context: Context) -> some ChatRequestViewController {
-         return viewController
-      }
-      
-      func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-         
-      }
-   }
-}
