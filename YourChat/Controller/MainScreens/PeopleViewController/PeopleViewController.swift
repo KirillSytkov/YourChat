@@ -51,7 +51,6 @@ class PeopleViewController: UIViewController {
       setup()
       setupSearchBar()
       setupCollectionView()
-      setupDataSource()
       addUsersListener()
    }
    
@@ -106,6 +105,8 @@ class PeopleViewController: UIViewController {
          switch result {
          case .success(let users):
             self.users = users
+            self.setupDataSource()
+            self.setupHeaderSection()
             self.reloadData(with: nil)
          case .failure(let error):
             self.showAlert(with: "Error", message: error.localizedDescription)
@@ -182,10 +183,11 @@ extension PeopleViewController {
             return self.configure(cellType: UserCell.self, with: itemIdentifier, for: indexPath)
          }
       })
-      
+   }
+   
+   private func setupHeaderSection() {
       dataSource?.supplementaryViewProvider = { collectionView, kind, indexPath in
          guard let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SectionHeader.reuseId, for: indexPath) as? SectionHeader else { return nil }
-         
          guard let section = Section(rawValue: indexPath.section) else  { return nil }
          
          let items = self.dataSource.snapshot().itemIdentifiers(inSection: .users)

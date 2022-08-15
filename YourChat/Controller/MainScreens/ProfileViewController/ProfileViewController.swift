@@ -12,9 +12,9 @@ class ProfileViewController: UIViewController {
    
    //MARK: - Properties
    let containerView = UIView()
-   let imageView = UIImageView(image: "human1.jpg", contentMode: .scaleAspectFill)
-   let nameLabel = UILabel(text: "Mark Boner", font: .systemFont(ofSize: 20, weight: .regular))
-   let aboutLabel = UILabel(text: "Hello my friend", font: .systemFont(ofSize: 16, weight: .light))
+   let imageView = UIImageView()
+   let nameLabel = UILabel()
+   let aboutLabel = UILabel()
    let textField = InsertableTextField()
    
    private let user: MUser
@@ -66,11 +66,14 @@ class ProfileViewController: UIViewController {
       containerView.layer.cornerRadius = 30
       
       imageView.translatesAutoresizingMaskIntoConstraints = false
+      imageView.contentMode = .scaleAspectFill
       
       nameLabel.translatesAutoresizingMaskIntoConstraints = false
+      nameLabel.font = UIFont.systemFont(ofSize: 20, weight: .regular)
       
       aboutLabel.translatesAutoresizingMaskIntoConstraints = false
       aboutLabel.numberOfLines = 1
+      aboutLabel.font = UIFont.systemFont(ofSize: 16, weight: .light)
       
       textField.translatesAutoresizingMaskIntoConstraints = false
       textField.borderStyle = .roundedRect

@@ -25,7 +25,7 @@ class FirestoreService {
    }
    
    private var activeChatsRef: CollectionReference {
-      return db.collection([Constants.DataBaseFolders.users, currentUser.id, Constants.DataBaseFolders.waitingChats].joined(separator: "/"))
+      return db.collection([Constants.DataBaseFolders.users, currentUser.id, Constants.DataBaseFolders.activeChats].joined(separator: "/"))
    }
    
    private var currentUser: MUser!

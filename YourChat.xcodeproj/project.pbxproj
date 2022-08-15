@@ -159,10 +159,10 @@
 			isa = PBXGroup;
 			children = (
 				4906E52B2890186300846E7E /* MainTabBarController.swift */,
-				4911953628A920E10084C389 /* ChatsViewController.swift */,
-				4907AB2C28945938002A54DE /* ProfileViewController */,
-				49B16E4728982436008E6EF8 /* ChatRequestViewController */,
 				497420842892EF7000DCEDBB /* Header */,
+				49FF892228AA8053008EF581 /* ChatsViewController */,
+				49B16E4728982436008E6EF8 /* ChatRequestViewController */,
+				4907AB2C28945938002A54DE /* ProfileViewController */,
 				4974208A2892F66500DCEDBB /* ListViewController */,
 				4974208B2892F67900DCEDBB /* PeopleViewController */,
 			);
@@ -190,8 +190,8 @@
 		49079839288EA9470077245A /* YourChat */ = {
 			isa = PBXGroup;
 			children = (
-				4907983A288EA9470077245A /* AppDelegate.swift */,
 				49079845288EA9490077245A /* LaunchScreen.storyboard */,
+				4907983A288EA9470077245A /* AppDelegate.swift */,
 				494F8E322899866D0099BB11 /* Helpers */,
 				49A0AF4B2899751C00C00A7C /* Services */,
 				4907984F288EAAA90077245A /* Extension */,
@@ -369,6 +369,14 @@
 				490B60EF28A81E2F003EF4E8 /* WaitingChatsNavigationDelegate.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		49FF892228AA8053008EF581 /* ChatsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4911953628A920E10084C389 /* ChatsViewController.swift */,
+			);
+			path = ChatsViewController;
 			sourceTree = "<group>";
 		};
 		61C1640381783A15D2E9946B /* Pods */ = {

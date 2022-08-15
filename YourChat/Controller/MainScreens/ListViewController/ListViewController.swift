@@ -59,7 +59,6 @@ class ListViewController: UIViewController {
       setupSearchBar()
       setupCollectionView()
       setupDataSource()
-      reloadData()
       addWaitingChatsListener()
       addActiveChatsListener()
    }
@@ -101,7 +100,7 @@ class ListViewController: UIViewController {
                self.present(chatRequestVC, animated: true)
             }
             self.waitingChats = chats
-            self.reloadData()
+            self.reloadData(with: nil)
          case .failure(let error):
             self.showAlert(with: "Error", message: error.localizedDescription)
          }
@@ -113,7 +112,7 @@ class ListViewController: UIViewController {
          switch result {
          case .success(let chats):
             self.activeChats = chats
-            self.reloadData()
+            self.reloadData(with: nil)
          case .failure(let error):
             self.showAlert(with: "Error", message: error.localizedDescription)
          }
@@ -149,11 +148,15 @@ extension ListViewController {
       }
    }
    
-   private func reloadData() {
+   private func reloadData(with searchText: String?) {
+      let filtered = activeChats.filter { chat in
+         chat.contains(filter: searchText)
+      }
+      
       var snapshot  = NSDiffableDataSourceSnapshot<Section, MChat>()
       snapshot.appendSections([.waitingChats, .activeChats])
       snapshot.appendItems(waitingChats, toSection: .waitingChats)
-      snapshot.appendItems(activeChats, toSection: .activeChats)
+      snapshot.appendItems(filtered, toSection: .activeChats)
       
       dataSource?.apply(snapshot, animatingDifferences: true)
    }
@@ -228,7 +231,7 @@ extension ListViewController {
 //MARK: - SearchBar delegate
 extension ListViewController: UISearchBarDelegate {
    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-      
+      reloadData(with: searchText)
    }
 }
 
