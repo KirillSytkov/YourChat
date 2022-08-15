@@ -62,7 +62,7 @@ class SetupProfileViewController: UIViewController {
          
          switch result{
          case .success(let user):
-            self.showAlert(with: "Succes!", message: "Profile saved!") {
+            self.showAlert(with: "Success", message: "Profile data saved") {
                let mainTabBar = MainTabBarController(currentUser: user)
                mainTabBar.modalPresentationStyle = .fullScreen
                self.present(mainTabBar, animated: true)

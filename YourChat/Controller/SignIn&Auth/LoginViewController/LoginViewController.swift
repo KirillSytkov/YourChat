@@ -46,7 +46,7 @@ class LoginViewController: UIViewController {
          switch result {
             
          case .success(let user):
-            self.showAlert(with: "Succes", message: "Hello User") {
+            self.showAlert(with: "Success", message: "Hello User") {
                FirestoreService.shared.getUserData(user: user) { result in
                   switch result {
                   case .success(let muser):
@@ -78,14 +78,14 @@ class LoginViewController: UIViewController {
             FirestoreService.shared.getUserData(user: user) { result in
                switch result {
                case .success(let muser):
-                  self.showAlert(with: "Succes", message: "You are registred") {
+                  self.showAlert(with: "Success", message: "You are registred") {
                      let mainTabBar = MainTabBarController(currentUser: muser)
                      let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
                      window?.rootViewController = mainTabBar
                      UIView.transition(with: window!, duration: 0.3, options: .transitionCrossDissolve, animations: nil, completion: nil)
                   }
                case .failure(_):
-                  self.showAlert(with: "Succes", message: "You are register") {
+                  self.showAlert(with: "Success", message: "You are registred") {
                      self.present(SetupProfileViewController(currentUser: user), animated: true)
                   }
                }

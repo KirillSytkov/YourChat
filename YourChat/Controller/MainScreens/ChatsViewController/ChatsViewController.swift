@@ -176,7 +176,7 @@ class ChatsViewController: MessagesViewController {
                case .success():
                   self.messagesCollectionView.scrollToLastItem()
                case .failure(_):
-                  self.showAlert(with: "Error", message: "Image can't be send") {
+                  self.showAlert(with: "Error", message: "Image can't be sent") {
                      
                   }
                }

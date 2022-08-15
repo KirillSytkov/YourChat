@@ -75,6 +75,7 @@ class FirestoreService {
                if let error = error {
                   completion(.failure(error))
                } else {
+                  self.currentUser = muser
                   completion(.success(muser))
                }
             }

@@ -48,7 +48,7 @@ class ProfileViewController: UIViewController {
          FirestoreService.shared.createWaitingChat(message: message, receiver: self.user) { result in
             switch result {
             case .success():
-               UIApplication.getTopViewController()?.showAlert(with: "Succes", message: "Message for \(self.user.username) has been sent")
+               UIApplication.getTopViewController()?.showAlert(with: "Success", message: "Message to \(self.user.username) has been sent")
             case .failure(let error):
                UIApplication.getTopViewController()?.showAlert(with: "Error", message: error.localizedDescription)
             }

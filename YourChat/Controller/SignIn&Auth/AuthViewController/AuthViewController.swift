@@ -60,13 +60,13 @@ class AuthViewController: UIViewController {
                   let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
                   window?.rootViewController = AuthViewController()
                   
-                  self.showAlert(with: "Succes", message: "You are registred") {
+                  self.showAlert(with: "Success", message: "You are registred") {
                      let mainTabBar = MainTabBarController(currentUser: muser)
                      self.present(mainTabBar, animated: true)
                   }
                   
                case .failure(_):
-                  self.showAlert(with: "Succes", message: "You are register") {
+                  self.showAlert(with: "Success", message: "You are registered") {
                      self.present(SetupProfileViewController(currentUser: user), animated: true)
                   }
                }
