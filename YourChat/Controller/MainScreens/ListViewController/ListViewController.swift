@@ -23,7 +23,6 @@ class ListViewController: UIViewController {
       
       func  description() -> String {
          switch self {
-            
          case .waitingChats:
             return "Waiting chats"
          case .activeChats:
@@ -270,7 +269,7 @@ extension ListViewController:  WaitingChatsNavigationDelegate {
       FirestoreService.shared.changeToActive(chat: chat) { result in
          switch result {
          case .success():
-            self.showAlert(with: "Success", message: "Hello")
+            debugPrint("change to active chat - success")
          case .failure(let error):
             self.showAlert(with: "Error", message: error.localizedDescription)
          }

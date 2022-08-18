@@ -59,7 +59,6 @@ struct MMessage: Hashable,MessageType {
       guard let sentDate = data["created"] as? Timestamp else { return nil }
       guard let senderId = data["senderId"] as? String else { return nil }
       guard let senderName = data["senderName"] as? String else { return nil }
-//      guard let content = data["content"] as? String else { return nil }
       
       self.id = document.documentID
       self.sentDate = sentDate.dateValue()

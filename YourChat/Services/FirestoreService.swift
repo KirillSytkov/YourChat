@@ -50,6 +50,11 @@ class FirestoreService {
    
    func saveProfileWith(id: String, email: String, username: String?, avatarImage: UIImage?, description: String?, sex: String?, completion: @escaping (Result<MUser, Error>) -> Void) {
       
+      guard let username = username, let avatarImage = avatarImage, let description = description, let sex = sex else {
+         completion(.failure(UserError.notFilled))
+         return
+      }
+
       guard Validators.isFilled(userName: username, description: description, sex: sex) else {
          completion(.failure(UserError.notFilled))
          return
@@ -60,14 +65,14 @@ class FirestoreService {
          return
       }
       
-      var muser = MUser(username: username!,
+      var muser = MUser(username: username,
                         email: email,
                         avatarStringURL: "not exist",
-                        description: description!,
-                        sex: sex!,
+                        description: description,
+                        sex: sex,
                         id: id)
       
-      StorageService.shared.upload(photo: avatarImage!) { result in
+      StorageService.shared.upload(photo: avatarImage) { result in
          switch result {
          case .success(let url):
             muser.avatarStringURL = url.absoluteString

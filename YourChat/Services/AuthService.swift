@@ -17,22 +17,27 @@ class AuthService {
    
    //MARK: - funcs
    func register(email: String? , password: String?, confirmPassword: String?, completion: @escaping (Result<User,Error>) -> Void) {
+      guard let email = email, let password = password, let confirmPassword = confirmPassword else {
+         completion(.failure(AuthError.notFilled))
+         return
+      }
+
       guard Validators.isFilled(email: email, password: password, confirmPassword: confirmPassword)  else {
          completion(.failure(AuthError.notFilled))
          return
       }
       
-      guard password!.lowercased() == confirmPassword!.lowercased() else {
+      guard password.lowercased() == confirmPassword.lowercased() else {
          completion(.failure(AuthError.passwordNotMatched))
          return
       }
       
-      guard Validators.isSimpleEmail(email!) else {
+      guard Validators.isSimpleEmail(email) else {
          completion(.failure(AuthError.invalidEmail))
          return
       }
       
-      auth.createUser(withEmail: email!, password: password!) { result, error in
+      auth.createUser(withEmail: email, password: password) { result, error in
          guard let result = result else {
             completion(.failure(error!))
             return
